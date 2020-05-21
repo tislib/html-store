@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"37e6a77380",applicationID:"39645109"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+
+        <meta http-equiv="content-language" content="en-us">
+
+        <!-- iOS metadata -->
+        <meta name="apple-mobile-web-app-capable" content="no">
+        <meta name="viewport" content="width=device-width" >
+
+        <link rel="apple-touch-icon-precomposed" href="//cdn-gce.allmovie.com/images/ios/AppIcon57x57.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="//cdn-gce.allmovie.com/images/ios/AppIcon72x72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="//cdn-gce.allmovie.com/images/ios/AppIcon114x114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//cdn-gce.allmovie.com/images/ios/AppIcon144x144.png">
+
+        <link rel="shortcut icon" href="//cdn-gce.allmovie.com/images/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss" />
+
+        
+        	<meta name="title" content="Nicolas Cage | Biography, Movie Highlights and Photos | AllMovie">
+	<meta name="keywords" content="Raising Arizona,Moonstruck,Fast Times at Ridgemont High">
+	<meta name="description" content="Find bio, credits and filmography information for Nicolas Cage on AllMovie - Actor Nicolas Cage has always strived to make a name for himself based on his work, rather than on&amp;hellip;">
+	<meta name="image" content="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_246x326_m0/73172923.jpg">
+
+        <meta property="og:site_name" content="AllMovie">
+
+	<meta property="fb:app_id" content="257333120973158">
+
+	<meta property="og:title" content="Nicolas Cage | Biography, Movie Highlights and Photos | AllMovie">
+	<meta itemprop="name" content="Nicolas Cage | Biography, Movie Highlights and Photos | AllMovie">
+	<meta name="twitter:title" content="Nicolas Cage | Biography, Movie Highlights and Photos | AllMovie">
+
+	<meta property="og:description" content="Find bio, credits and filmography information for Nicolas Cage on AllMovie - Actor Nicolas Cage has always strived to make a name for himself based on his work, rather than on&amp;hellip;">
+	<meta itemprop="description" content="Find bio, credits and filmography information for Nicolas Cage on AllMovie - Actor Nicolas Cage has always strived to make a name for himself based on his work, rather than on&amp;hellip;">
+	<meta name="twitter:description" content="Find bio, credits and filmography information for Nicolas Cage on AllMovie - Actor Nicolas Cage has always strived to make a name for himself based on his work, rather than on&amp;hellip;">
+
+	<meta property="og:image" content="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_246x326_m0/73172923.jpg">
+	<meta itemprop="image" content="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_246x326_m0/73172923.jpg">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:image" content="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_246x326_m0/73172923.jpg">
+        
+	<meta property="og:type" content="profile">
+
+        <meta property="og:image" content="//cdn-gce.allmovie.com/images/allmovie_facebook_share.png">
+        <meta property="og:url" content="https://www.allmovie.com/artist/nicolas-cage-p10155">
+
+        <link rel="canonical" href="https://www.allmovie.com/artist/nicolas-cage-p10155">
+
+        <title>Nicolas Cage | Biography, Movie Highlights and Photos | AllMovie</title>
+
+        <link type="text/css" rel="stylesheet" href="//cdn-gce.allmovie.com/cache/dist/css/global/global-f698cf4c09.css">
+                    <link type="text/css" rel="stylesheet" href="//cdn-gce.allmovie.com/cache/dist/css/pages/artist/artist-c6e26e1b2a.css">        
+
+        <!-- Alexa tag -->
+        <meta name="alexaVerifyID" content="8Y3cJGTkeK8rAnuFENBdVBMTwC4"/>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-7096127-2', 'auto');
+
+                                    ga('send', 'pageview', 'artist/nicolas-cage-p10155');
+                        setTimeout("ga('send','event','adjusted bounce rate','page visit 15 seconds or more')",15000);
+                </script>
+
+        <!-- Media query polyfill ( Always require because loading via dynamic ajax injection is too slow [the enquire.js will fire before the ajax completes] ) -->
+        <script src="//cdn-gce.allmovie.com/js/lib/media.match.min.js"></script>
+
+        <script src="//cdn-gce.allmovie.com/cache/dist/js/setup-0b69446a3c.js"></script>
+                <script type="text/javascript">
+   window.CMNUNT_OPTIONS = {async: true};
+   var isMobile = /iPhone|iPod|BlackBerry|Opera Mini|(android|bb\d+|meego).+mobile/i.test(navigator.userAgent);
+   var cmnunt_site = 'cmn_allmovie';
+   var cmnunt_silo = 's_pop';
+   var cmnunt_subsilo = '';
+   var cmnunt_tier = 'to,t2,internal'
+   var cmnunt_zone = 'artist'
+   var cmnunt_kw = 'name_id=p10155,blockadex=FALSE,genre_id=drama-d649,pagename=artist'
+   var cmnunt_exclude = ''
+   cmnunt_site += window.isMobile ? '_mob' : '';
+    (function(){
+       var ns = document.createElement('script');
+       ns.src = '//media.complex.com/common/cmnUNT' + (window.isMobile ? 'mobile' : '') + '.js';
+       ns.type = 'text/javascript';
+       ns.async = true;
+       ns.addEventListener('load', function() {
+           window.dispatchEvent(new Event('cmnunt.loaded'));
+       });
+       var s = document.getElementsByTagName('script')[0];
+       s.parentNode.insertBefore(ns, s);
+       })();
+       function cmnUntLoadWrapper() {
+           var adConf = Array.prototype.slice.call(arguments);
+           if (typeof CMNUNT === 'object' && typeof CMNUNT.load ===  'function') {
+               CMNUNT.load.apply(CMNUNT, adConf);
+           } else {
+               window.addEventListener('cmnunt.loaded', function() {
+                   CMNUNT.load.apply(CMNUNT, adConf);
+               });
+           }
+       }
+</script>
+        <script type="text/javascript">
+            var _qevents = _qevents || [];
+
+            (function() {
+                var elem = document.createElement('script');
+                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+                elem.async = true;
+                elem.type = "text/javascript";
+                var scpt = document.getElementsByTagName('script')[0];
+                scpt.parentNode.insertBefore(elem, scpt);
+            })();
+        </script>
+
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                function async_load(script_url){
+                    var protocol = ('https:' == document.location.protocol ? 'https://' : 'http://');
+                    var s = document.createElement('script'); s.src = protocol + script_url;
+                    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+                }
+                bm_website_code = '54B5E7261F7A43C0';
+                jQuery(document).ready(function(){async_load('asset.pagefair.com/measure.min.js')});
+                jQuery(document).ready(function(){async_load('asset.pagefair.net/ads.min.js')});
+            })();
+        </script>
+
+        <script>
+            function pf_notify(adblock_detected){
+                // adblock_detected value is true/false. Convert to something more meaningful
+                var adblock_status = adblock_detected ? 'is_adblocking' : 'not_adblocking';
+                ga('send', 'event', 'setCustomDimension', 1, {
+                    'dimension2': adblock_status,
+                    'nonInteraction': true
+                });
+            }
+        </script>
+
+        <script type="text/javascript">
+            // DO NOT IMPLEMENT //
+            // this code through the following //
+            // //
+            // Floodlight Pixel Manager //
+            // DCM Pixel Manager //
+            // Any system that places code in an iframe //
+            (function () {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = ('https:' == document.location.protocol ? 'https://s' : 'http://i')
+                    + '.po.st/static/v4/post-widget.js#publisherKey=kba929m8haa0o5spvepn';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();
+        </script>
+
+        <!-- Quantcast Choice. Consent Manager Tag -->
+<script type="text/javascript" async=true>
+    var elem = document.createElement('script');
+    elem.src = 'https://quantcast.mgr.consensu.org/cmp.js';
+    elem.async = true;
+    elem.type = "text/javascript";
+    var scpt = document.getElementsByTagName('script')[0];
+    scpt.parentNode.insertBefore(elem, scpt);
+    (function() {
+        var gdprAppliesGlobally = false;
+        function addFrame() {
+            if (!window.frames['__cmpLocator']) {
+                if (document.body) {
+                    var body = document.body,
+                        iframe = document.createElement('iframe');
+                    iframe.style = 'display:none';
+                    iframe.name = '__cmpLocator';
+                    body.appendChild(iframe);
+                } else {
+                    // In the case where this stub is located in the head,
+                    // this allows us to inject the iframe more quickly than
+                    // relying on DOMContentLoaded or other events.
+                    setTimeout(addFrame, 5);
+                }
+            }
+        }
+        addFrame();
+        function cmpMsgHandler(event) {
+            var msgIsString = typeof event.data === "string";
+            var json;
+            if(msgIsString) {
+                json = event.data.indexOf("__cmpCall") != -1 ? JSON.parse(event.data) : {};
+            } else {
+                json = event.data;
+            }
+            if (json.__cmpCall) {
+                var i = json.__cmpCall;
+                window.__cmp(i.command, i.parameter, function(retValue, success) {
+                    var returnMsg = {"__cmpReturn": {
+                            "returnValue": retValue,
+                            "success": success,
+                            "callId": i.callId
+                        }};
+                    event.source.postMessage(msgIsString ?
+                        JSON.stringify(returnMsg) : returnMsg, '*');
+                });
+            }
+        }
+        window.__cmp = function (c) {
+            var b = arguments;
+            if (!b.length) {
+                return __cmp.a;
+            }
+            else if (b[0] === 'ping') {
+                b[2]({"gdprAppliesGlobally": gdprAppliesGlobally,
+                    "cmpLoaded": false}, true);
+            } else if (c == '__cmp')
+                return false;
+            else {
+                if (typeof __cmp.a === 'undefined') {
+                    __cmp.a = [];
+                }
+                __cmp.a.push([].slice.apply(b));
+            }
+        }
+        window.__cmp.gdprAppliesGlobally = gdprAppliesGlobally;
+        window.__cmp.msgHandler = cmpMsgHandler;
+        if (window.addEventListener) {
+            window.addEventListener('message', cmpMsgHandler, false);
+        }
+        else {
+            window.attachEvent('onmessage', cmpMsgHandler);
+        }
+    })();
+    window.__cmp('init', {
+        'Language': 'en',
+        'Initial Screen Reject Button Text': 'I do not accept',
+        'Initial Screen Accept Button Text': 'I accept',
+        'Purpose Screen Header Title Text': 'Privacy settings',
+        'Purpose Screen Body Text': 'You can set your consent preferences and determine how you want your data to be used based on the purposes below. You may set your preferences for us independently from those of third-party partners. Each purpose has a description so that you know how we and partners use your data.',
+        'Vendor Screen Body Text': 'You can set consent preferences for each individual third-party company below. Expand each company list item to see what purposes they use data for to help make your choices. In some cases, companies may disclose that they use your data without asking for your consent, based on their legitimate interests. You can click on their privacy policies for more information and to opt out.',
+        'Vendor Screen Accept All Button Text': 'Accept all',
+        'Vendor Screen Reject All Button Text': 'Reject all',
+        'Initial Screen Body Text': 'We and our partners use technology such as cookies on our site to personalise content and ads, provide social media features, and analyse our traffic. Click below to consent to the use of this technology across the web. You can change your mind and change your consent choices at anytime by returning to this site.',
+        'Initial Screen Body Text Option': 1,
+        'Display UI': 'inEU',
+        'UI Layout': '',
+        'Publisher Name': 'AllMovie',
+        'Publisher Purpose IDs': [1,2,3,4,5],
+        'Publisher Logo': 'https://cdn-gce.allmovie.com/images/allmovie_150x60.png',
+        'Publisher Purpose Legitimate Interest IDs': [1,2,3,4,5]
+    });
+</script>
+<!-- End Quantcast Choice. Consent Manager Tag -->
+<style>
+    .qc-cmp-button {
+        background-color: #0e76bc  !important;
+        border-color: #0e76bc  !important;
+    }
+    .qc-cmp-button:hover {
+        background-color: transparent !important;
+        border-color: #0e76bc  !important;
+    }
+    .qc-cmp-alt-action,
+    .qc-cmp-link {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-button.qc-cmp-button.qc-cmp-secondary-button:hover {
+        color:#ffffff !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button {
+        border-color: #0e76bc  !important;
+        background-color: transparent !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+        background-color: #0e76bc  !important;
+    }
+    .qc-cmp-ui a,
+    .qc-cmp-ui .qc-cmp-alt-action {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-small-toggle.qc-cmp-toggle-on,
+    .qc-cmp-toggle.qc-cmp-toggle-on {
+        background-color: #0e76bc !important;
+        border: 1px solid #0e76bc !important;
+    }
+</style>
+    </head>
+    <body>
+        <noscript>
+            <div class="javascript-disabled" id="no-js">
+                AllMovie relies heavily on JavaScript.<br>
+                Please enable JavaScript in your browser to use the site fully.
+            </div>
+        </noscript>
+
+        
+        <div class="stripe-container header-leaderboard">
+    <div class="advertising leaderboard">
+                                    <div id="AllMovie_PersonPage_728x90_ATF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('top', {
+containerId: 'AllMovie_PersonPage_728x90_ATF'
+});
+}
+</script>                        </div>
+</div>
+
+<div class="overflow-container artist">
+
+<div class="stripe-container header-main-nav clearfix">
+    <div class="max-header">
+        <div class="main-nav">
+
+    <div class="logo-container">
+        <a class="logo no-snap" href="/">
+            <h1 class="logo-img">AllMovie</h1>
+        </a>
+    </div>
+
+    <nav class="mobile-menu"></nav>
+
+    <div class="search-container">
+        <form class="site-search" method="post" name="site-search" action="/search">
+            <input type="submit" class="site-search-button" name="submit">
+            <input type="search" class="site-search-input" name="term" placeholder="Search" tabindex="1" autocomplete="off">
+        </form>
+    </div>
+
+    <nav class="site-nav">
+        <ul>
+            <li class="new-releases">
+                <a href="/showtimes/movies" class="new-releases-menu-link">New Releases</a>
+                <ul class="new-releases-nav">
+    <div class="sub-nav-container">
+        <div class="sub-nav-columns">
+            <div class="new-releases-subnav left">
+                <li class="nr-intheaters">
+                    <a href="/showtimes/movies">In Theaters</a>
+                </li>
+                <li class="nr-newondvd">
+                    <a href="/new-releases/dvds">New on DVD</a>
+                </li>
+                <li class="nr-newtostream">
+                    <a href="/now-available-to-watch">New to Stream</a>
+                </li>
+            </div>
+            <div class="new-releases-subnav right">
+                <div class="sub-nav-content">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ul>            </li>
+            <li class="discover">
+                <a href="/genres" class="discover-link">Discover</a>
+                <ul class="discover-nav">
+    <div class="sub-nav-container">
+        <div class="sub-nav-columns left">
+            <li id="discover-genres" class="discover-drop-trigger active">
+                <a href="/genres">Genres<span class="genres-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+            <li id="discover-moods" class="discover-drop-trigger">
+                <a href="/moods">Moods<span class="moods-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+            <li id="discover-themes" class="discover-drop-trigger">
+                <a href="/themes">Themes<span class="themes-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+        </div>
+        <div class="sub-nav-columns right">
+            <ul class="discover-genre-secondary">
+    <div class="genre-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/action-d646">Action</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/comedy-drama-d531">Comedy Drama</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/comedy-d648">Comedy</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/horror-d654">Horror</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/thriller-d942">Thriller</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/drama-d649">Drama</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/science-fiction-d652">Science Fiction</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/romance-d948">Romance</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/adventure-d647">Adventure</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/fantasy-d650">Fantasy</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/childrens-family-d660">Children's/Family</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/crime-d653">Crime</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/western-d656">Western</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/mystery-d651">Mystery</a>
+        </li>
+        <li class="last">
+            <a href="/genres">All Genres</a>
+        </li>
+    </div>
+</ul>            <ul class="discover-mood-secondary" style="display:none;">
+    <div class="mood-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Adrenaline-Rush-d2026">Adrenaline Rush</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Blood-and-Gore-d260">Blood and Gore</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Carnal-Knowledge-d262">Carnal Knowledge</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Comedy-on-the-Edge-d2030">Comedy on the Edge</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Eyepoppers-d5216">Eyepoppers</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Fantastic-Reality-d2024">Fantastic Reality</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Head-Trips-d2035">Head Trips</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/In-the-Mood-for-Love-d2027">In the Mood for Love</a>
+        </li>
+        <li>
+            <a href="/characteristic/mood/Just-for-Fun-d2029">Just for Fun</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Nail-biters-d2037">Nail-biters</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Other-Dimensions-d2038">Other Dimensions</a>
+        </li>
+        <li>
+            <a href="/characteristic/mood/Pick-Me-Ups-d2036">Pick-Me-Ups</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li>
+            <a href="/characteristic/mood/Tough-Guys-d259">Tough Guys</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Trashy-d2031">Trashy</a>
+        </li>
+        <li class="last">
+            <a href="/moods">All Moods</a>
+        </li>
+    </div>
+</ul>            <ul class="discover-theme-secondary" style="display:none;">
+    <div class="theme-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Cinderella-Stories-d1521">Cinderella Stories</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/College-Life-d1522">College Life</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Demonic-Possession-d1529">Demonic Possession</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/End-of-the-World-d1619">End of the World</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Forbidden-Love-d2277">Forbidden Love</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/High-School-Life-d1431">High School Life</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Kidnapping-d1665">Kidnapping</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Prostitutes-d1594">Prostitutes</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Sexual-Awakening-d1505">Sexual Awakening</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Teachers-and-Students-d1614">Teachers & Students</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Teen-Pregnancy-d2256">Teen Pregnancy</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Vampires-d643">Vampires</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Witches-d1450">Witches</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Zombies-d644">Zombies</a>
+        </li>
+        <li class="last">
+            <a href="/themes">All Themes</a>
+        </li>
+    </div>
+</ul>        </div>
+    </div>
+</ul>            </li>
+            <li class="blog">
+                <a href="/blog">Articles</a>
+                <ul>
+    <div class="sub-nav-container clearfix">
+        <div class="sub-nav-columns">
+            <div class="blog-list">
+                <li class="blog-features">
+                    <a href="/blog/features">Features</a>
+                </li>
+                <li class="blog-reviews">
+                    <a href="/blog/reviews-5">Reviews</a>
+                </li>
+                <li class="blog-lists">
+                    <a href="/blog/lists">Lists</a>
+                </li>
+            </div>
+            <div class="blog-list">
+                <li class="blog-stream">
+                    <a href="/blog/watch-online">Watch Online</a>
+                </li>
+                <li class="blog-news">
+                    <a href="/blog/news">News</a>
+                </li>
+                <li class="blog-all">
+                    <a href="/blog">All Posts</a>
+                </li>
+            </div>
+            <div class="blog-subnav right">
+                <div class="sub-nav-blog-content"></div>
+            </div>
+        </div>
+    </div>
+</ul>
+            </li>
+<!--            <li class="videos">-->
+<!--                <a href="/videos" class="videos-link">Video</a>-->
+<!--            </li>-->
+            <li class="recommendations">
+                <a href="/recommendations">Recommendations</a>
+            </li>
+            <li class="advanced-search">
+                <a href="/advanced-search">Advanced Search</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="user-social-nav">
+        <nav class="social-nav">
+            <ul>
+                <li class="facebook">
+                    <a href="https://www.facebook.com/AllMoviecom" alt="Like us on Facebook" title="Like us on Facebook">Facebook</a>
+                </li>
+                <li class="twitter">
+                    <a href="https://twitter.com/#!/Allmovie" alt="Follow us on Twitter" title="Follow us on Twitter">Twitter</a>
+                </li>
+                <li class="rss">
+                    <a alt="Subscribe to our RSS feed" title="Subscribe to our RSS feed" alt="Subscribe to our RSS feed" href="/rss" target="_blank">RSS</a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav class="user-nav"></nav>
+    </div>
+
+</div>    </div>
+</div>
+
+<div id="cmn_wrap">
+<div class="content-container" itemscope itemtype="https://schema.org/Person">
+
+    <div class="sidebar">
+
+                               <div class="artist-image">
+                <script type="text/javascript">
+                    var posterGallery = [{"width":"310","height":"442","url":"https:\/\/cps-static.rovicorp.com\/2\/Open\/Getty\/Nicolas%20Cage\/_derived_jpg_q90_310x470_m0\/73172923.jpg","title":"Nicolas Cage","author":"Getty Images","copyrightOwner":"Sean Gallup\/Getty Images Entertainment\/Getty Images"}];
+                </script>
+                <img src="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_310x470_m0/73172923.jpg" alt="Nicolas Cage" title="click to embiggen" itemprop="image" class="poster-launch">
+
+                                    <div class="credit">
+                        photo credit: Getty Images                    </div>
+                
+                                    <div class="credit">
+                        photo credit: Sean Gallup/Getty Images Entertainment/Getty Images                    </div>
+                
+                <div class="affiliate-links">
+                    <div class="mobile-only">Watch or buy on:</div>
+<div  class="movie-affiliates num-2">
+    <ul class="partner-buttons">
+        <li>
+            <a title="Search on Amazon" href="https://www.amazon.com/s/?field-keywords=movie: with &#34;Nicolas Cage&#34;&tag=allmoviedotcom-20"
+               class="partner-button amazon"
+               data-title="Nicolas+Cage" ></a>
+        </li>
+        <li>
+            <a title="Find on Google Play" href="https://play.google.com/store/search?c=movies&hl=en&q=Nicolas+Cage"
+               class="partner-button googleplay"
+               data-title="Nicolas+Cage" ></a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+                </div>
+            </div>
+        
+        <div class="advertising medium-rectangle">
+            <div id="AllMovie_PersonPage_300x250_ATF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('aside', {
+containerId: 'AllMovie_PersonPage_300x250_ATF'
+});
+}
+</script>        </div>
+
+        <section class="basic-info">
+
+            <div class="altTitle">
+            <h4>Aliases</h4>
+            <div>
+                                    <span>Nicholas Kim Coppola</span>
+                            </div>
+        </div>
+    
+            <div class="altTitle">
+            <h4>Genres</h4>
+            <div>
+                                    <span><a href="https://www.allmovie.com/genre/drama-d649">Drama</a></span>
+                                    <span><a href="https://www.allmovie.com/genre/comedy-d648">Comedy</a></span>
+                                    <span><a href="https://www.allmovie.com/genre/thriller-d942">Thriller</a></span>
+                                    <span><a href="https://www.allmovie.com/genre/action-d646">Action</a></span>
+                                    <span><a href="https://www.allmovie.com/genre/romance-d948">Romance</a></span>
+                            </div>
+        </div>
+    
+            <div class="altTitle">
+            <h4>Subgenres</h4>
+            <div>
+                                    <span><a href="https://www.allmovie.com/subgenre/crime-thriller-d576">Crime Thriller</a></span>
+                                    <span><a href="https://www.allmovie.com/subgenre/action-thriller-d509">Action Thriller</a></span>
+                                    <span><a href="https://www.allmovie.com/subgenre/psychological-drama-d542">Psychological Drama</a></span>
+                                    <span><a href="https://www.allmovie.com/subgenre/coming-of-age-d959">Coming-of-Age</a></span>
+                                    <span><a href="https://www.allmovie.com/subgenre/caper-d579">Caper</a></span>
+                                    <span><a href="https://www.allmovie.com/subgenre/supernatural-thriller-d2276">Supernatural Thriller</a></span>
+                            </div>
+        </div>
+    
+    <a href="https://www.allmovie.com/artist/nicolas-cage-p10155/corrections" class="submit-corrections">Submit Corrections</a>
+</section>
+            <section class="media-gallery hidden">
+        <h3>Photo Gallery</h3>
+
+        <div class="media-gallery-content">
+                                <div class="media-gallery-image thumbnail"                         data-gallery="{&quot;height&quot;:&quot;800&quot;,&quot;width&quot;:&quot;561&quot;,&quot;formatid&quot;:&quot;1391914&quot;,&quot;author&quot;:&quot;Getty Images&quot;,&quot;copyrightOwner&quot;:&quot;Sean Gallup\/Getty Images Entertainment\/Getty Images&quot;,&quot;zoomLevel&quot;:&quot;&quot;,&quot;sonyImage&quot;:null,&quot;url&quot;:&quot;https:\/\/cps-static.rovicorp.com\/2\/Open\/Getty\/Nicolas%20Cage\/_derived_jpg_q90_600x800_m0\/73172923.jpg&quot;,&quot;aspectRatio&quot;:&quot;263:375&quot;,&quot;useCase&quot;:&quot;Raw - Embiggen&quot;,&quot;title&quot;:&quot;Nicolas Cage&quot;}">
+                        <div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Getty/Nicolas%20Cage/_derived_jpg_q90_246x326_m0/73172923.jpg" style="top:-28px;" width="130" height="185" alt="Nicolas Cage" data-debug="228x326"></div>                    </div>
+
+                    
+                    </div>
+        <span class="gallery-lightbox-bind"></span>
+        <div class="dots-container">
+                    </div>
+    </section>
+
+
+        <div class="advertising medium-rectangle-btf">
+            <div id="AllMovie_PersonPage_300x250_BTF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 19 <= 0) {
+cmnUntLoadWrapper('aside', {
+containerId: 'AllMovie_PersonPage_300x250_BTF'
+, lazyLoad: true
+});
+}
+</script>        </div>
+
+                <div class="advertising small-saambaa">
+            <!-- BEGIN SAAMBAA VIDEO AD --><div id="smb-vidad-widget" class="smb-vidad" data-smb-partner-id="allmovie" data-smb-vid-player="nhI3wNRn" data-src="//allmovie.saambaa.com/partner/valg/allmovie"></div><script> (function(d, s, id) { var js,ejs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.async = true; js.src = '//saambaa.com/widget/va/jw/assets/smb-vidad.js'; ejs.parentNode.insertBefore(js, ejs); }(document, 'script', 'smb-vidad-js')); </script><!-- END SAAMBAA VIDEO AD -->        </div>
+        
+    </div>
+
+    <div class="content">
+
+        <header>
+    <hgroup class="artist-info">
+        <h2 class="artist-name" itemprop="name">
+            Nicolas Cage        </h2>
+        <a href="javascript:void(0)" class="add-to-favorite-link" data-id="P++++10155" data-type="artist" data-text="FAVORITE ARTIST" data-addtolist="addtofavorite"></a>
+    </hgroup>
+
+    <hgroup class="details">
+        
+            
+            <span>
+                Active - <span>1982   -  Present</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+            </span>
+        
+                                <span>
+                Born - <span>Jan 7, 1964 in Long Beach, California, United States</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+            </span>
+        
+        
+                                <span class="header-artist-genres">
+                Genres - <a href="https://www.allmovie.com/genre/drama-d649">Drama</a>, <a href="https://www.allmovie.com/genre/comedy-d648">Comedy</a>, <a href="https://www.allmovie.com/genre/thriller-d942">Thriller</a>, <a href="https://www.allmovie.com/genre/action-d646">Action</a>, <a href="https://www.allmovie.com/genre/romance-d948">Romance</a>            </span>
+            </hgroup>
+</header>
+        <ul class="tabs overview">
+
+        <li class="tab overview" data-sections="bio,factsheets">
+        <a href="/artist/nicolas-cage-p10155">
+            Overview
+            <span class="arrow">&darr;</span>
+        </a>
+    </li>
+    
+            <li class="tab filmography">
+            <a href="/artist/nicolas-cage-p10155/filmography">
+                Filmography
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+            <li class="tab other_appearances">
+            <a href="/artist/nicolas-cage-p10155/other_appearances">
+                Other Appearances
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+            <li class="tab awards">
+            <a href="/artist/nicolas-cage-p10155/awards">
+                Awards
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+</ul>
+                
+<div class="allmovie-share" data-sharemessage="Check out Nicolas Cage - Biography, Filmography, and Awards - AllMovie - ">
+    <p>
+        Share on
+    </p>
+    <ul class="share-menu">
+        <li>
+            <a title="Share on Facebook" class="share-button facebook" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.allmovie.com%2Fartist%2Fnicolas-cage-p10155">facebook</a>
+        </li>
+        <li>
+            <a title="Share on Twitter" class="share-button twitter" href="https://twitter.com/share?url=https%3A%2F%2Fwww.allmovie.com%2Fartist%2Fnicolas-cage-p10155&text=Check+out+Nicolas+Cage+-+Biography%2C+Filmography%2C+and+Awards+-+AllMovie+-+&counturl=https%3A%2F%2Fwww.allmovie.com%2Fartist%2Fnicolas-cage-p10155">twitter</a>
+        </li>
+    </ul>
+    <div class="share-modal">
+        <a title="close button" class="close-button"></a>
+        <div class="share-frame"></div>
+    </div>
+</div>        
+            <section class="review read-more" itemscope itemtype="https://schema.org/CreativeWork">
+
+        
+        <h4 class="review-author headline" itemprop="author">
+            Biography
+                            by <span itemprop="name">Hal Erickson</span>
+                    </h4>
+
+        <div class="text" itemprop="text">
+            <p>Actor <a href="https://www.allmovie.com/artist/nicolas-cage-p10155" class="name-link">Nicolas Cage</a> has always strived to make a name for himself based on his work, rather than on his lineage. As the nephew of filmmaker <a href="https://www.allmovie.com/artist/francis-ford-coppola-p85868" class="name-link">Francis Ford Coppola</a>, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> altered his last name to avoid accusations of nepotism. (He chose "<a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a>" both out of admiration for avant-garde musician <a href="https://www.allmovie.com/artist/john-cage-p10154" class="name-link">John Cage</a> and <I>en homage</I> to comic book hero Luke Cage). Even if he had retained the family name, it isn't likely that anyone would consider <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> holding fast to his uncle's coattails. Time and again, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> travels to great lengths to add verisimilitude to his roles.</p><p>Born January 7, 1964, in Long Beach, CA, to a literature professor father and dancer/choreographer mother, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> first caught the acting bug while a student at Beverly Hills High School. After graduation, he debuted on film with a small part in <a href="https://www.allmovie.com/artist/amy-heckerling-p93875" class="name-link">Amy Heckerling</a>'s 1982 classic <a href="https://www.allmovie.com/movie/fast-times-at-ridgemont-high-v16859" class="movie-link">Fast Times at Ridgemont High</a>. Following a lead role in <a href="https://www.allmovie.com/artist/martha-coolidge-p85800" class="name-link">Martha Coolidge</a>'s cult comedy <a href="https://www.allmovie.com/movie/valley-girl-v52142" class="movie-link">Valley Girl</a> (1983), <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> spent the remainder of the decade playing endearingly bizarre and disreputable men, most notably as Crazy Charlie the Appliance King in <a href="https://www.allmovie.com/movie/peggy-sue-got-married-v37616" class="movie-link">Peggy Sue Got Married</a> (1986), Hi McDonough in <a href="https://www.allmovie.com/movie/raising-arizona-v40176" class="movie-link">Raising Arizona</a> (1987), and Ronny Cammareri in the same year's <a href="https://www.allmovie.com/movie/moonstruck-v33285" class="movie-link">Moonstruck</a>, the last of which won him a Golden Globe nomination and a legion of female fans, ecstatic over the actor's unconventional romantic appeal.</p><p>The '90s saw <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> assume a series of diverse roles, ranging from a violent ex-con in <a href="https://www.allmovie.com/artist/david-lynch-p100454" class="name-link">David Lynch</a>'s <a href="https://www.allmovie.com/movie/wild-at-heart-v54604" class="movie-link">Wild at Heart</a> (1990) to a sweet-natured private eye in the romantic comedy <a href="https://www.allmovie.com/movie/honeymoon-in-vegas-v22995" class="movie-link">Honeymoon in Vegas</a> (1992) to a dying alcoholic in <a href="https://www.allmovie.com/artist/mike-figgis-p89744" class="name-link">Mike Figgis</a>' astonishing <a href="https://www.allmovie.com/movie/leaving-las-vegas-v135758" class="movie-link">Leaving Las Vegas</a> (1995). For this last role, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> won a Best Actor Oscar for his quietly devastating portrayal, and, respectability in hand, gained an official entrance into Hollywood's higher ranks. </p><p>After winning his Oscar, along with a score of other honors for his performance, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> switched gears in a way that would prove to be, with the occasional exception, largely permanent. He dove into a series of action movies like the Michael Bay thriller <a href="https://www.allmovie.com/movie/the-rock-v136282" class="movie-link">The Rock</a>, the prisoners-on-a-plane movie <a href="https://www.allmovie.com/movie/con-air-v154933" class="movie-link">Con Air</a>, and the infamous <a href="https://www.allmovie.com/artist/john-woo-p117248" class="name-link">John Woo</a> flick <a href="https://www.allmovie.com/movie/face-off-v154939" class="movie-link">Face/Off</a>. Greeted with hefty paychecks and audience approval, Cage forged ahead on a career path lit largely with explosions.</p><p>There would be exceptions, like 1998's <a href="https://www.allmovie.com/movie/city-of-angels-v161651" class="movie-link">City of Angels</a>, a remake of <a href="https://www.allmovie.com/artist/wim-wenders-p116407" class="name-link">Wim Wenders</a>' <a href="https://www.allmovie.com/movie/wings-of-desire-v54797" class="movie-link">Wings of Desire</a>, and <a href="https://www.allmovie.com/artist/martin-scorsese-p110533" class="name-link">Martin Scorsese</a>'s <a href="https://www.allmovie.com/movie/bringing-out-the-dead-v180989" class="movie-link">Bringing Out the Dead</a>, and the the lightly dramatic romantic comedy <a href="https://www.allmovie.com/movie/the-family-man-v229073" class="movie-link">The Family Man</a>, but <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> stuck mostly to thrillers and action movies. A spate of such films would fill his resume, like <a href="https://www.allmovie.com/movie/gone-in-60-seconds-v186742" class="movie-link">Gone in 60 Seconds</a>, <a href="https://www.allmovie.com/movie/the-life-of-david-gale-v273182" class="movie-link">The Life of David Gale</a>, 8MM, and Snake Eyes, but Cage would briefly revisit his roots in character work, teaming with <a href="https://www.allmovie.com/movie/being-john-malkovich-v180993" class="movie-link">Being John Malkovich</a> director <a href="https://www.allmovie.com/artist/spike-jonze-p263616" class="name-link">Spike Jonze</a> in 2002 for a duel role in the complex comedy <a href="https://www.allmovie.com/movie/adaptation-v260395" class="movie-link">Adaptation</a> (2002). With <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> appearing as both screenwriter <a href="https://www.allmovie.com/artist/charlie-kaufman-p271315" class="name-link">Charlie Kaufman</a> as well as his fictional brother Donald, <a href="https://www.allmovie.com/movie/adaptation-v260395" class="movie-link">Adaptation</a> followed Charlie's attempt to adapt author <a href="https://www.allmovie.com/artist/susan-orlean-p313659" class="name-link">Susan Orlean</a>'s seemingly unfilmable novel The Orchid Thief as a feature film, and Donald's parallel efforts to write his own hacky yet lucrative script by following the guidance of a caustic, <a href="https://www.allmovie.com/artist/syd-field-p374825" class="name-link">Syd Field</a>-like screenwriting instructor (<a href="https://www.allmovie.com/artist/brian-cox-p86106" class="name-link">Brian Cox</a>). A weighty role that demanded an actor capable of portraying characters that couldn't differ more emotionally despite their outward appearance, <a href="https://www.allmovie.com/movie/adaptation-v260395" class="movie-link">Adaptation</a> brought <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> his second Oscar nomination -- and he was soon back to business as usual.</p><p>2004 saw the release of the megahit adventure film <a href="https://www.allmovie.com/movie/national-treasure-v289256" class="movie-link">National Treasure</a>, which cast <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> as an archaeologist convinced there's a treasure map on the back of the U.S. Declaration of Independence. The outrageous film would earn a sequel in 2007, but first <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> made the ill-advised decision to star in <a href="https://www.allmovie.com/artist/neil-labute-p222126" class="name-link">Neil LaBute</a>'s reworking of the <a href="https://www.allmovie.com/artist/robin-hardy-p93430" class="name-link">Robin Hardy</a>/<a href="https://www.allmovie.com/artist/anthony-shaffer-p110923" class="name-link">Anthony Shaffer</a> collaboration <a href="https://www.allmovie.com/movie/the-wicker-man-v331334" class="movie-link">The Wicker Man</a> (2006). Though video compilations of the movie's most hilariously hackneyed moments would become popular on the internet, Cage was soon portraying a motorcycle-driving stuntman who sells his soul to Mephistopheles -- in <a href="https://www.allmovie.com/artist/mark-steven-johnson-p167867" class="name-link">Mark Steven Johnson</a>'s live-action comic book adaptation <a href="https://www.allmovie.com/movie/ghost-rider-v291033" class="movie-link">Ghost Rider</a>. Upon premiering in the States, the film became a big success. In the same year's sci-fi thriller <a href="https://www.allmovie.com/movie/next-v344214" class="movie-link">Next</a>, directed by <a href="https://www.allmovie.com/artist/lee-tamahori-p194015" class="name-link">Lee Tamahori</a>, <a href="https://www.allmovie.com/artist/cage-p10155" class="name-link">Cage</a> plays Cris Johnson, a man who attains the ability to see into the future and must suddenly decide between saving himself and saving the world; the film failed to ignite the way <a href="https://www.allmovie.com/movie/ghost-rider-v291033" class="movie-link">Ghost Rider</a> did just a couple months before it. </p><p>Next came Bangkok Dangerous, Knowing, The Bad Lieutenant: Port of Call - New Orleans, Drive Angry, Seeking Justice, and Trespass -- all high octane, high adrenaline movies that found Cage diving, leaping, and shooting his way through the story. Cage found himself with a surprise hit in Matthew Vaughn's Kick-Ass (2010), playing a vigilante former cop in the black comedy film. He voiced the main character in 2013's animated The Croods, but then mostly stuck to action-crime-thriller-type movies for the next couple of years, including films like Left Behind (2014), The Runner (2015) and The Trust (2016).</p>
+        </div>
+
+    </section>
+<section class="filmography-highlights">
+    <h4 class="headline">
+        Movie Highlights
+    </h4>
+    <div class="clearfix">
+                                <div class="filmography-highlight-wrapper" data-tooltip="{&quot;id&quot;:&quot;V++++40176&quot;,&quot;thumbnail&quot;:true}">
+                <a title="Raising Arizona" href="/movie/raising-arizona-v40176">
+                    <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/20th_Century_Fox_39/Program/30174/_derived_jpg_q90_480x340_m0/RaisingArizona_1400x2100.jpg"  width="186" height="279" alt="Raising Arizona" style="top:-2px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/20th_Century_Fox_39/Program/30174/_derived_jpg_q90_480x340_m0/RaisingArizona_1400x2100.jpg" width="186" height="279" alt="Raising Arizona" style="top:-2px;"></noscript></div>                </a>
+            </div>
+                                <div class="filmography-highlight-wrapper" data-tooltip="{&quot;id&quot;:&quot;V++++33285&quot;,&quot;thumbnail&quot;:true}">
+                <a title="Moonstruck" href="/movie/moonstruck-v33285">
+                    <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/20th%20Century%20Fox/Moonstruck/_derived_jpg_q90_480x340_m0/Moonstruck-PosterArt.jpg"  width="204" height="274" alt="Moonstruck" style="left:-9px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/20th%20Century%20Fox/Moonstruck/_derived_jpg_q90_480x340_m0/Moonstruck-PosterArt.jpg" width="204" height="274" alt="Moonstruck" style="left:-9px;"></noscript></div>                </a>
+            </div>
+                                <div class="filmography-highlight-wrapper" data-tooltip="{&quot;id&quot;:&quot;V++++16859&quot;,&quot;thumbnail&quot;:true}">
+                <a title="Fast Times at Ridgemont High" href="/movie/fast-times-at-ridgemont-high-v16859">
+                    <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/NBC%20Universal%20Distribution/Movies/Fast%20Times%20at%20Ridgemont%20High/_derived_jpg_q90_480x340_m0/fsttKey300.jpg"  width="205" height="274" alt="Fast Times at Ridgemont High" style="left:-9px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/NBC%20Universal%20Distribution/Movies/Fast%20Times%20at%20Ridgemont%20High/_derived_jpg_q90_480x340_m0/fsttKey300.jpg" width="205" height="274" alt="Fast Times at Ridgemont High" style="left:-9px;"></noscript></div>                </a>
+            </div>
+            </div>
+
+    <span class="all-related"><a href="/artist/nicolas-cage-p10155/filmography">See Full Filmography</a></span>
+
+</section>
+    <section class="overview-factsheet">
+        <h4 class="factsheet headline">
+            Factsheet
+        </h4>
+        <ul>
+            <li>A big comic book fan, he was inspired to change his last name to Cage from Marvel's Luke Cage. His son, Kal-el, was named after Superman and Cage was also instrumental in turning the Marvel character Ghost Rider into a movie. </li>
+<li>Nephew of Oscar-winning director-screenwriter Francis Ford Coppola, who directed him in <I>Rumble Fish</I> (1983) and&nbsp;<I>Peggy Sue Got Married</I>&nbsp;(1986). </li>
+<li>Received a star on the Hollywood Walk of Fame in 1998. </li>
+<li>Like the&nbsp;Hustons (Walter, John and Anjelica), there are three generations of Oscar winners in the family: Nicolas;&nbsp;his uncle Francis Ford Coppola; his grandfather Carmine Coppola; and cousin Sofia Coppola. </li>
+        </ul>
+    </section>
+
+                    <section class="allmovie_anyclip">
+    <script type="text/javascript">
+        if ( !isMobile_AllMovie ) {
+            document.write('<div id="ac-lre-player-ph">');
+            document.write('<div id="ac-lre-player"></div>');
+            document.write('</div>');
+            document.write('\x3Cscript id="lre-player-widget" src="https://player.anyclip.com/anyclip-widget/lre-widget/prod/v1/src/lre.js" pubname="allmoviecom" widgetname="0011r00001kaHto_1006">\x3C/script>');
+        } else {
+            document.write('<div id="ac-lre-iframe-ph">');
+            document.write('</div>');
+            document.write('\x3Cscript id="lre-player-widget" src="https://player.anyclip.com/anyclip-widget/lre-widget/prod/v1/src/lre.js" pubname="allmoviecom" widgetname="0011r00001kaHto_1017">\x3C/script>');
+        }
+    </script>
+</section>        
+    </div>
+
+</div>
+
+
+<div class="stripe-container footer-leaderboard">
+    <div class="advertising leaderboard">
+                                    <div id="AllMovie_PersonPage_728x90_BTF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('top', {
+containerId: 'AllMovie_PersonPage_728x90_BTF'
+, lazyLoad: true
+});
+}
+</script>                        </div>
+</div>
+<div class="stripe-container footer-container">
+    <footer>
+        <div class="other-sites">
+                <a href="//www.allmusic.com/" title="AllMusic - Albums and Artist Database - Music Search, Guide, Recommendations, Videos and Reviews">AllMusic</a>&nbsp;&nbsp;|&nbsp;
+                <a href="//www.sidereel.com/" title="SideReel - Watch TV &amp; Movies Online | Episodes, Seasons, Series | SideReel">SideReel</a>&nbsp;&nbsp;|&nbsp;
+                <a href="//www.celebified.com/" title="Celebified - Celebrity news, watch videos, get tv info">Celebified</a>
+        </div>
+
+        <div class="corporate-links">
+                <a href="/about" title="AllMovie About">About</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/faq" title="AllMovie FAQ">FAQ</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/copyright-policy" title="AllMovie - Copyright Policy &amp; Intellectual Property Rights">Copyright Policy</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/advertise" title="AllMovie Advertising Network"><br class="mobile-break">Advertise</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/privacy-notice" title="Privacy Notice">Privacy Notice</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/terms-of-service" title="AllMovie Terms of Service">Terms of Service</a>
+        </div>
+
+        <div class="copyright">
+                &copy;2020 AllMovie, Netaktion LLC<span class="line-two">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="mobile-break">All Rights Reserved
+        </div>
+    </footer>
+</div><script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="//cdn-gce.allmovie.com/js/jquery/jquery-2.2.4.min.js"%3E%3C/script%3E'))</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write(unescape('%3Cscript src="//cdn-gce.allmovie.com/js/jquery/jquery-ui.min.js"%3E%3C/script%3E'))</script>
+
+<!--            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>-->
+
+<script src="//cdn-gce.allmovie.com/cache/dist/js/global-67f430d018.js"></script>
+
+
+        <script src="//cdn-gce.allmovie.com/cache/dist/js/artist-7695a3b99a.overview.js"></script>
+    <script>
+        if (User.loggedIn) {
+            ga('set', 'dimension1', 'Yes');
+        } else {
+            ga('set', 'dimension1', 'No');
+        }
+    </script>
+
+<!-- Begin comScore Tag -->
+<script>
+    var _comscore = _comscore || [];
+    _comscore.push({c1: "2", c2: "17343944"});
+    (function () {
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+        s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+    })();
+</script>
+<noscript>
+    <img src="//b.scorecardresearch.com/p?c1=2&c2=17343944&cv=2.0&cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+
+</div>
+</div>
+
+<!-- Footer Ad Tag -->
+<script type="text/javascript">
+(function() {
+if (window.isMobile) return;
+window.cToolbarInit = function() {
+cToolbar.load({
+mobileRightButton: 'email',
+facebookUsername: 'AllMovieCom',
+facebookName: 'AllMovie',
+twitterHandle: 'AllMovie',
+twitterName: 'AllMovie',
+youtubeChannel: '',
+youtubeChannelName:'',
+desktopBackground: 'solid',
+desktopSocialButtons: ['twitter','facebook'],
+channel: 'Entertainment'
+});
+};
+var ns = document.createElement('script');
+ns.type = 'text/javascript';
+ns.async = true;
+ns.src = '//toolbar.complex.com/dist/ctoolbar.min.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ns, s);
+})();
+</script>
+<script type="text/javascript">
+    _qevents.push({
+        qacct: "p-59TntzuqummDw",
+        labels: "AllMedia.AllMovie"
+    });
+</script>
+<noscript>
+    <div style="display:none;">
+        <img src="//pixel.quantserve.com/pixel/p-59TntzuqummDw.gif?labels=AllMedia" border="0" height="1" width="1"
+             alt="Quantcast"/>
+    </div>
+</noscript>
+
+<!-- Double Verify -->
+<img src="https://tps30.doubleverify.com/visit.jpg?ctx=2908533&cmp=2736444&sid=24324&plc=DV-RTHM20170324001&advid=2908534&region=30&btadsrv=rhythmone&app=appid&sup=sspid&DVP_DV_TT=2&DVP_DV_CT=1&DVP_APPID=NotApplicable&DVP_SSPID=NotApplicable&DVP_PUBID=NotApplicable&DVP_PP_BUNDLE_ID=NotApplicable&DVP_RO_SSPID=NotApplicable&DVP_PP_ORTB_PUB_ID=NotApplicable&DVP_RO_SITEID=NotApplicable&DVP_RO_TRAFFIC=NotApplicable&DVP_PP_DEAL_ID=NotApplicable&DVPX_PP_IMP_ID=NotApplicable&DVPX_PP_UID=NotApplicable&DVP_RO_CDID=NotApplicable&DVPX_PP_AUCTION_UA=Wget%2F1.19.4+%28linux-gnu%29&DVP_PP_AUCTION_IP=10.128.0.55&turl=AllMovie.com&dvtagver=6.1.img"
+     alt="" width="0" height="0">
+<!-- End Double Verify -->
+
+    <!-- captify pixel -->
+    <script>
+                (function (c, a, p, t, i, f, y) {
+            i = c.createElement(a);
+            t = c.getElementsByTagName(a)[0];
+            i.type = 'text/javascript';
+            i.async = true;
+            i.src = p;
+            t.parentNode.insertBefore(i, t);
+        })(document, 'script', '//p.cpx.to/p/12022/px.js');
+    </script>
+
+    <!-- eyeota pixel -->
+    <!--            <script type="text/javascript" async defer src="//ps.eyeota.net/pixel?pid=omdhoi0&t=ajs&sid=allmovie"></script>-->
+
+
+    <script>
+        $.getScript("/ads.js", function (data, textStatus, jqxhr) {
+            // success block
+            ga('send', 'event', 'setCustomDimension', 1, {
+                'dimension2': 'not_adblocking',
+                'nonInteraction': true
+            });
+
+        })
+            .fail(function () {
+                ga('send', 'event', 'setCustomDimension', 1, {
+                    'dimension2': 'is_adblocking',
+                    'nonInteraction': true
+                });
+
+                // fire ad block detected GA event
+                allmovie.gaTrackEvent({data: ["AdBlock", "Interaction", "User Has Adblock Enabled"]});
+            });
+    </script>
+
+<!-- fire refresh -->
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"37e6a77380","applicationID":"39645109","transactionName":"NlMEYhZXW0oEWkQNVg8ZJ1UQX1pXSnhCEFASQklZElNHTwxcRw==","queueTime":0,"applicationTime":62,"atts":"GhQTFF5NSBVHWBJeQhxL","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>

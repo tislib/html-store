@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"37e6a77380",applicationID:"39645109"};window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var i=n[t]={exports:{}};e[t][0].call(i.exports,function(n){var i=e[t][1][n];return r(i||n)},i,i.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<t.length;i++)r(t[i]);return r}({1:[function(e,n,t){function r(){}function i(e,n,t){return function(){return o(e,[u.now()].concat(f(arguments)),n?null:this,t),n?void 0:this}}var o=e("handle"),a=e(4),f=e(5),c=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",d=l+"ixn-";a(p,function(e,n){s[n]=i(l+n,!0,"api")}),s.addPageAction=i(l+"addPageAction",!0),s.setCurrentRouteName=i(l+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,i="function"==typeof n;return o(d+"tracer",[u.now(),e,t],r),function(){if(c.emit((i?"":"no-")+"fn-start",[u.now(),r,i],t),i)try{return n.apply(this,arguments)}catch(e){throw c.emit("fn-err",[arguments,this,e],t),e}finally{c.emit("fn-end",[u.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=i(d+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){var t=e.getEntries();t.forEach(function(e){"first-paint"===e.name?c("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&c("timing",["fcp",Math.floor(e.startTime)])})}function i(e,n){var t=e.getEntries();t.length>0&&c("lcp",[t[t.length-1]])}function o(e){if(e instanceof s&&!l){var n,t=Math.round(e.timeStamp);n=t>1e12?Date.now()-t:u.now()-t,l=!0,c("timing",["fi",t,{type:e.type,fid:n}])}}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var a,f,c=e("handle"),u=e("loader"),s=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){a=new PerformanceObserver(r),f=new PerformanceObserver(i);try{a.observe({entryTypes:["paint"]}),f.observe({entryTypes:["largest-contentful-paint"]})}catch(p){}}if("addEventListener"in document){var l=!1,d=["click","keydown","mousedown","pointerdown","touchstart"];d.forEach(function(e){document.addEventListener(e,o,!1)})}}},{}],3:[function(e,n,t){function r(e,n){if(!i)return!1;if(e!==i)return!1;if(!n)return!0;if(!o)return!1;for(var t=o.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var f=navigator.userAgent,c=f.match(a);c&&f.indexOf("Chrome")===-1&&f.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}n.exports={agent:i,version:o,match:r}},{}],4:[function(e,n,t){function r(e,n){var t=[],r="",o=0;for(r in e)i.call(e,r)&&(t[o]=n(r,e[r]),o+=1);return t}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],5:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,i=t-n||0,o=Array(i<0?0:i);++r<i;)o[r]=e[n+r];return o}n.exports=r},{}],6:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function i(e){function n(e){return e&&e instanceof r?e:e?c(e,f,o):o()}function t(t,r,i,o){if(!l.aborted||o){e&&e(t,r,i);for(var a=n(i),f=v(t),c=f.length,u=0;u<c;u++)f[u].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function d(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||i(t)}function w(e,n){u(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:d,addEventListener:d,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(l.aborted=!0,s=l.backlog={})}var f="nr@context",c=e("gos"),u=e(4),s={},p={},l=n.exports=i();l.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(i.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[n]=r,r}var i=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){i.buffer([e],r),i.emit(e,n,t)}var i=e("ee").get("handle");n.exports=r,r.ee=i},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!x++){var e=E.info=NREUM.info,n=d.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();u(y,function(n,t){e[n]||(e[n]=t)}),c("mark",["onload",a()+E.offset],null,"api");var t=d.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function i(){"complete"===d.readyState&&o()}function o(){c("mark",["domContent",a()+E.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(f=Math.max((new Date).getTime(),f))-E.offset}var f=(new Date).getTime(),c=e("handle"),u=e(4),s=e("ee"),p=e(3),l=window,d=l.document,m="addEventListener",v="attachEvent",g=l.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:l.setImmediate,CT:clearTimeout,XHR:g,REQ:l.Request,EV:l.Event,PR:l.Promise,MO:l.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1167.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),E=n.exports={offset:f,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),e(2),d[m]?(d[m]("DOMContentLoaded",o,!1),l[m]("load",r,!1)):(d[v]("onreadystatechange",i),l[v]("onload",r)),c("mark",["firstbyte",f],null,"api");var x=0,O=e(6)},{}],"wrap-function":[function(e,n,t){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(5),a="nr@original",f=Object.prototype.hasOwnProperty,c=!1;n.exports=function(e,n){function t(e,n,t,i){function nrWrapper(){var r,a,f,c;try{a=this,r=o(arguments),f="function"==typeof t?t(r,a):t||{}}catch(u){l([u,"",[r,a,i],f])}s(n+"start",[r,a,i],f);try{return c=e.apply(a,r)}catch(p){throw s(n+"err",[r,a,p],f),p}finally{s(n+"end",[r,a,c],f)}}return r(e)?e:(n||(n=""),nrWrapper[a]=e,p(e,nrWrapper),nrWrapper)}function u(e,n,i,o){i||(i="");var a,f,c,u="-"===i.charAt(0);for(c=0;c<n.length;c++)f=n[c],a=e[f],r(a)||(e[f]=t(a,u?f+i:i,o,f))}function s(t,r,i){if(!c||n){var o=c;c=!0;try{e.emit(t,r,i,n)}catch(a){l([a,t,r,i])}c=o}}function p(e,n){if(Object.defineProperty&&Object.keys)try{var t=Object.keys(e);return t.forEach(function(t){Object.defineProperty(n,t,{get:function(){return e[t]},set:function(n){return e[t]=n,n}})}),n}catch(r){l([r])}for(var i in e)f.call(e,i)&&(n[i]=e[i]);return n}function l(n){try{e.emit("internal-error",n)}catch(t){}}return e||(e=i),t.inPlace=u,t.flag=a,t}},{}]},{},["loader"]);</script>
+
+        <meta http-equiv="content-language" content="en-us">
+
+        <!-- iOS metadata -->
+        <meta name="apple-mobile-web-app-capable" content="no">
+        <meta name="viewport" content="width=device-width" >
+
+        <link rel="apple-touch-icon-precomposed" href="//cdn-gce.allmovie.com/images/ios/AppIcon57x57.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="//cdn-gce.allmovie.com/images/ios/AppIcon72x72.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="//cdn-gce.allmovie.com/images/ios/AppIcon114x114.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//cdn-gce.allmovie.com/images/ios/AppIcon144x144.png">
+
+        <link rel="shortcut icon" href="//cdn-gce.allmovie.com/images/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss" />
+
+        
+        	<meta name="title" content="Army of One (2016) - Larry Charles | Synopsis, Characteristics, Moods, Themes and Related | AllMovie">
+	<meta name="keywords" content="Army of One,Larry Charles,Trailers,Reviews,Summary,Synopsis,Cast,SimilarMovies,Related Movies,Rent,Buy,Photos,Movies Stills,Awards,Comedy,Absurd Comedy,Satire,2016">
+	<meta name="description" content="Find trailers, reviews, synopsis, awards and cast information for Army of One (2016) - Larry Charles on AllMovie - In this comedy inspired by a true story, an&amp;hellip;">
+	<meta name="image" content="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_500x500_m0/31004430_Armyofone_1536x2048.jpg">
+
+        <meta property="og:site_name" content="AllMovie">
+
+	<meta property="fb:app_id" content="257333120973158">
+
+	<meta property="og:title" content="Army of One (2016) - Larry Charles | Synopsis, Characteristics, Moods, Themes and Related | AllMovie">
+	<meta itemprop="name" content="Army of One (2016) - Larry Charles | Synopsis, Characteristics, Moods, Themes and Related | AllMovie">
+	<meta name="twitter:title" content="Army of One (2016) - Larry Charles | Synopsis, Characteristics, Moods, Themes and Related | AllMovie">
+
+	<meta property="og:description" content="Find trailers, reviews, synopsis, awards and cast information for Army of One (2016) - Larry Charles on AllMovie - In this comedy inspired by a true story, an&amp;hellip;">
+	<meta itemprop="description" content="Find trailers, reviews, synopsis, awards and cast information for Army of One (2016) - Larry Charles on AllMovie - In this comedy inspired by a true story, an&amp;hellip;">
+	<meta name="twitter:description" content="Find trailers, reviews, synopsis, awards and cast information for Army of One (2016) - Larry Charles on AllMovie - In this comedy inspired by a true story, an&amp;hellip;">
+
+	<meta property="og:image" content="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_500x500_m0/31004430_Armyofone_1536x2048.jpg">
+	<meta itemprop="image" content="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_500x500_m0/31004430_Armyofone_1536x2048.jpg">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:image" content="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_500x500_m0/31004430_Armyofone_1536x2048.jpg">
+        
+	<meta property="og:type" content="video.movie">
+	<meta property="video:director" content="https://www.allmovie.com/artist/larry-charles-p266743">
+
+        <meta property="og:image" content="//cdn-gce.allmovie.com/images/allmovie_facebook_share.png">
+        <meta property="og:url" content="https://www.allmovie.com/movie/army-of-one-v668154">
+
+        <link rel="canonical" href="https://www.allmovie.com/movie/army-of-one-v668154">
+
+        <title>Army of One (2016) - Larry Charles | Synopsis, Characteristics, Moods, Themes and Related | AllMovie</title>
+
+        <link type="text/css" rel="stylesheet" href="//cdn-gce.allmovie.com/cache/dist/css/global/global-f698cf4c09.css">
+                    <link type="text/css" rel="stylesheet" href="//cdn-gce.allmovie.com/cache/dist/css/pages/movie/movie-8389691043.css">        
+
+        <!-- Alexa tag -->
+        <meta name="alexaVerifyID" content="8Y3cJGTkeK8rAnuFENBdVBMTwC4"/>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-7096127-2', 'auto');
+
+                                    ga('send', 'pageview', 'movie/army-of-one-v668154');
+                        setTimeout("ga('send','event','adjusted bounce rate','page visit 15 seconds or more')",15000);
+                </script>
+
+        <!-- Media query polyfill ( Always require because loading via dynamic ajax injection is too slow [the enquire.js will fire before the ajax completes] ) -->
+        <script src="//cdn-gce.allmovie.com/js/lib/media.match.min.js"></script>
+
+        <script src="//cdn-gce.allmovie.com/cache/dist/js/setup-0b69446a3c.js"></script>
+                <script type="text/javascript">
+   window.CMNUNT_OPTIONS = {async: true};
+   var isMobile = /iPhone|iPod|BlackBerry|Opera Mini|(android|bb\d+|meego).+mobile/i.test(navigator.userAgent);
+   var cmnunt_site = 'cmn_allmovie';
+   var cmnunt_silo = 's_pop';
+   var cmnunt_subsilo = '';
+   var cmnunt_tier = 'to,t2,internal'
+   var cmnunt_zone = 'movie'
+   var cmnunt_kw = 'movie_id=v668154,blockadex=FALSE,genre_id=comedy-d648,pagename=movie'
+   var cmnunt_exclude = ''
+   cmnunt_site += window.isMobile ? '_mob' : '';
+    (function(){
+       var ns = document.createElement('script');
+       ns.src = '//media.complex.com/common/cmnUNT' + (window.isMobile ? 'mobile' : '') + '.js';
+       ns.type = 'text/javascript';
+       ns.async = true;
+       ns.addEventListener('load', function() {
+           window.dispatchEvent(new Event('cmnunt.loaded'));
+       });
+       var s = document.getElementsByTagName('script')[0];
+       s.parentNode.insertBefore(ns, s);
+       })();
+       function cmnUntLoadWrapper() {
+           var adConf = Array.prototype.slice.call(arguments);
+           if (typeof CMNUNT === 'object' && typeof CMNUNT.load ===  'function') {
+               CMNUNT.load.apply(CMNUNT, adConf);
+           } else {
+               window.addEventListener('cmnunt.loaded', function() {
+                   CMNUNT.load.apply(CMNUNT, adConf);
+               });
+           }
+       }
+</script>
+        <script type="text/javascript">
+            var _qevents = _qevents || [];
+
+            (function() {
+                var elem = document.createElement('script');
+                elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+                elem.async = true;
+                elem.type = "text/javascript";
+                var scpt = document.getElementsByTagName('script')[0];
+                scpt.parentNode.insertBefore(elem, scpt);
+            })();
+        </script>
+
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                function async_load(script_url){
+                    var protocol = ('https:' == document.location.protocol ? 'https://' : 'http://');
+                    var s = document.createElement('script'); s.src = protocol + script_url;
+                    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+                }
+                bm_website_code = '54B5E7261F7A43C0';
+                jQuery(document).ready(function(){async_load('asset.pagefair.com/measure.min.js')});
+                jQuery(document).ready(function(){async_load('asset.pagefair.net/ads.min.js')});
+            })();
+        </script>
+
+        <script>
+            function pf_notify(adblock_detected){
+                // adblock_detected value is true/false. Convert to something more meaningful
+                var adblock_status = adblock_detected ? 'is_adblocking' : 'not_adblocking';
+                ga('send', 'event', 'setCustomDimension', 1, {
+                    'dimension2': adblock_status,
+                    'nonInteraction': true
+                });
+            }
+        </script>
+
+        <script type="text/javascript">
+            // DO NOT IMPLEMENT //
+            // this code through the following //
+            // //
+            // Floodlight Pixel Manager //
+            // DCM Pixel Manager //
+            // Any system that places code in an iframe //
+            (function () {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = ('https:' == document.location.protocol ? 'https://s' : 'http://i')
+                    + '.po.st/static/v4/post-widget.js#publisherKey=kba929m8haa0o5spvepn';
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            })();
+        </script>
+
+        <!-- Quantcast Choice. Consent Manager Tag -->
+<script type="text/javascript" async=true>
+    var elem = document.createElement('script');
+    elem.src = 'https://quantcast.mgr.consensu.org/cmp.js';
+    elem.async = true;
+    elem.type = "text/javascript";
+    var scpt = document.getElementsByTagName('script')[0];
+    scpt.parentNode.insertBefore(elem, scpt);
+    (function() {
+        var gdprAppliesGlobally = false;
+        function addFrame() {
+            if (!window.frames['__cmpLocator']) {
+                if (document.body) {
+                    var body = document.body,
+                        iframe = document.createElement('iframe');
+                    iframe.style = 'display:none';
+                    iframe.name = '__cmpLocator';
+                    body.appendChild(iframe);
+                } else {
+                    // In the case where this stub is located in the head,
+                    // this allows us to inject the iframe more quickly than
+                    // relying on DOMContentLoaded or other events.
+                    setTimeout(addFrame, 5);
+                }
+            }
+        }
+        addFrame();
+        function cmpMsgHandler(event) {
+            var msgIsString = typeof event.data === "string";
+            var json;
+            if(msgIsString) {
+                json = event.data.indexOf("__cmpCall") != -1 ? JSON.parse(event.data) : {};
+            } else {
+                json = event.data;
+            }
+            if (json.__cmpCall) {
+                var i = json.__cmpCall;
+                window.__cmp(i.command, i.parameter, function(retValue, success) {
+                    var returnMsg = {"__cmpReturn": {
+                            "returnValue": retValue,
+                            "success": success,
+                            "callId": i.callId
+                        }};
+                    event.source.postMessage(msgIsString ?
+                        JSON.stringify(returnMsg) : returnMsg, '*');
+                });
+            }
+        }
+        window.__cmp = function (c) {
+            var b = arguments;
+            if (!b.length) {
+                return __cmp.a;
+            }
+            else if (b[0] === 'ping') {
+                b[2]({"gdprAppliesGlobally": gdprAppliesGlobally,
+                    "cmpLoaded": false}, true);
+            } else if (c == '__cmp')
+                return false;
+            else {
+                if (typeof __cmp.a === 'undefined') {
+                    __cmp.a = [];
+                }
+                __cmp.a.push([].slice.apply(b));
+            }
+        }
+        window.__cmp.gdprAppliesGlobally = gdprAppliesGlobally;
+        window.__cmp.msgHandler = cmpMsgHandler;
+        if (window.addEventListener) {
+            window.addEventListener('message', cmpMsgHandler, false);
+        }
+        else {
+            window.attachEvent('onmessage', cmpMsgHandler);
+        }
+    })();
+    window.__cmp('init', {
+        'Language': 'en',
+        'Initial Screen Reject Button Text': 'I do not accept',
+        'Initial Screen Accept Button Text': 'I accept',
+        'Purpose Screen Header Title Text': 'Privacy settings',
+        'Purpose Screen Body Text': 'You can set your consent preferences and determine how you want your data to be used based on the purposes below. You may set your preferences for us independently from those of third-party partners. Each purpose has a description so that you know how we and partners use your data.',
+        'Vendor Screen Body Text': 'You can set consent preferences for each individual third-party company below. Expand each company list item to see what purposes they use data for to help make your choices. In some cases, companies may disclose that they use your data without asking for your consent, based on their legitimate interests. You can click on their privacy policies for more information and to opt out.',
+        'Vendor Screen Accept All Button Text': 'Accept all',
+        'Vendor Screen Reject All Button Text': 'Reject all',
+        'Initial Screen Body Text': 'We and our partners use technology such as cookies on our site to personalise content and ads, provide social media features, and analyse our traffic. Click below to consent to the use of this technology across the web. You can change your mind and change your consent choices at anytime by returning to this site.',
+        'Initial Screen Body Text Option': 1,
+        'Display UI': 'inEU',
+        'UI Layout': '',
+        'Publisher Name': 'AllMovie',
+        'Publisher Purpose IDs': [1,2,3,4,5],
+        'Publisher Logo': 'https://cdn-gce.allmovie.com/images/allmovie_150x60.png',
+        'Publisher Purpose Legitimate Interest IDs': [1,2,3,4,5]
+    });
+</script>
+<!-- End Quantcast Choice. Consent Manager Tag -->
+<style>
+    .qc-cmp-button {
+        background-color: #0e76bc  !important;
+        border-color: #0e76bc  !important;
+    }
+    .qc-cmp-button:hover {
+        background-color: transparent !important;
+        border-color: #0e76bc  !important;
+    }
+    .qc-cmp-alt-action,
+    .qc-cmp-link {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-button.qc-cmp-button.qc-cmp-secondary-button:hover {
+        color:#ffffff !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button {
+        border-color: #0e76bc  !important;
+        background-color: transparent !important;
+    }
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+        background-color: #0e76bc  !important;
+    }
+    .qc-cmp-ui a,
+    .qc-cmp-ui .qc-cmp-alt-action {
+        color: #0e76bc  !important;
+    }
+    .qc-cmp-small-toggle.qc-cmp-toggle-on,
+    .qc-cmp-toggle.qc-cmp-toggle-on {
+        background-color: #0e76bc !important;
+        border: 1px solid #0e76bc !important;
+    }
+</style>
+    </head>
+    <body>
+        <noscript>
+            <div class="javascript-disabled" id="no-js">
+                AllMovie relies heavily on JavaScript.<br>
+                Please enable JavaScript in your browser to use the site fully.
+            </div>
+        </noscript>
+
+        
+        <div class="stripe-container header-leaderboard">
+    <div class="advertising leaderboard">
+                                    <div id="AllMovie_MoviePage_728x90_ATF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('top', {
+containerId: 'AllMovie_MoviePage_728x90_ATF'
+});
+}
+</script>                        </div>
+</div>
+
+<div class="overflow-container movie">
+
+<div class="stripe-container header-main-nav clearfix">
+    <div class="max-header">
+        <div class="main-nav">
+
+    <div class="logo-container">
+        <a class="logo no-snap" href="/">
+            <h1 class="logo-img">AllMovie</h1>
+        </a>
+    </div>
+
+    <nav class="mobile-menu"></nav>
+
+    <div class="search-container">
+        <form class="site-search" method="post" name="site-search" action="/search">
+            <input type="submit" class="site-search-button" name="submit">
+            <input type="search" class="site-search-input" name="term" placeholder="Search" tabindex="1" autocomplete="off">
+        </form>
+    </div>
+
+    <nav class="site-nav">
+        <ul>
+            <li class="new-releases">
+                <a href="/showtimes/movies" class="new-releases-menu-link">New Releases</a>
+                <ul class="new-releases-nav">
+    <div class="sub-nav-container">
+        <div class="sub-nav-columns">
+            <div class="new-releases-subnav left">
+                <li class="nr-intheaters">
+                    <a href="/showtimes/movies">In Theaters</a>
+                </li>
+                <li class="nr-newondvd">
+                    <a href="/new-releases/dvds">New on DVD</a>
+                </li>
+                <li class="nr-newtostream">
+                    <a href="/now-available-to-watch">New to Stream</a>
+                </li>
+            </div>
+            <div class="new-releases-subnav right">
+                <div class="sub-nav-content">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ul>            </li>
+            <li class="discover">
+                <a href="/genres" class="discover-link">Discover</a>
+                <ul class="discover-nav">
+    <div class="sub-nav-container">
+        <div class="sub-nav-columns left">
+            <li id="discover-genres" class="discover-drop-trigger active">
+                <a href="/genres">Genres<span class="genres-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+            <li id="discover-moods" class="discover-drop-trigger">
+                <a href="/moods">Moods<span class="moods-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+            <li id="discover-themes" class="discover-drop-trigger">
+                <a href="/themes">Themes<span class="themes-arrow" style="display:none">&nbsp;&nbsp;&rsaquo;</span></a>
+            </li>
+        </div>
+        <div class="sub-nav-columns right">
+            <ul class="discover-genre-secondary">
+    <div class="genre-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/action-d646">Action</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/comedy-drama-d531">Comedy Drama</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/comedy-d648">Comedy</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/horror-d654">Horror</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/thriller-d942">Thriller</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/drama-d649">Drama</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/science-fiction-d652">Science Fiction</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/romance-d948">Romance</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/adventure-d647">Adventure</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/fantasy-d650">Fantasy</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/childrens-family-d660">Children's/Family</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/crime-d653">Crime</a>
+        </li>
+    </div>
+    <div class="genre-column">
+        <li class="individual">
+            <a href="/genre/western-d656">Western</a>
+        </li>
+        <li class="individual">
+            <a href="/genre/mystery-d651">Mystery</a>
+        </li>
+        <li class="last">
+            <a href="/genres">All Genres</a>
+        </li>
+    </div>
+</ul>            <ul class="discover-mood-secondary" style="display:none;">
+    <div class="mood-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Adrenaline-Rush-d2026">Adrenaline Rush</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Blood-and-Gore-d260">Blood and Gore</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Carnal-Knowledge-d262">Carnal Knowledge</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Comedy-on-the-Edge-d2030">Comedy on the Edge</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Eyepoppers-d5216">Eyepoppers</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Fantastic-Reality-d2024">Fantastic Reality</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Head-Trips-d2035">Head Trips</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/In-the-Mood-for-Love-d2027">In the Mood for Love</a>
+        </li>
+        <li>
+            <a href="/characteristic/mood/Just-for-Fun-d2029">Just for Fun</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li class="individual">
+            <a href="/characteristic/mood/Nail-biters-d2037">Nail-biters</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Other-Dimensions-d2038">Other Dimensions</a>
+        </li>
+        <li>
+            <a href="/characteristic/mood/Pick-Me-Ups-d2036">Pick-Me-Ups</a>
+        </li>
+    </div>
+    <div class="mood-column">
+        <li>
+            <a href="/characteristic/mood/Tough-Guys-d259">Tough Guys</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/mood/Trashy-d2031">Trashy</a>
+        </li>
+        <li class="last">
+            <a href="/moods">All Moods</a>
+        </li>
+    </div>
+</ul>            <ul class="discover-theme-secondary" style="display:none;">
+    <div class="theme-column">
+        <!-- spacer to prevent hover weirdness -->
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Cinderella-Stories-d1521">Cinderella Stories</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/College-Life-d1522">College Life</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Demonic-Possession-d1529">Demonic Possession</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/End-of-the-World-d1619">End of the World</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Forbidden-Love-d2277">Forbidden Love</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/High-School-Life-d1431">High School Life</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Kidnapping-d1665">Kidnapping</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Prostitutes-d1594">Prostitutes</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Sexual-Awakening-d1505">Sexual Awakening</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Teachers-and-Students-d1614">Teachers & Students</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Teen-Pregnancy-d2256">Teen Pregnancy</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Vampires-d643">Vampires</a>
+        </li>
+    </div>
+    <div class="theme-column">
+        <li class="individual">
+            <a href="/characteristic/theme/Witches-d1450">Witches</a>
+        </li>
+        <li class="individual">
+            <a href="/characteristic/theme/Zombies-d644">Zombies</a>
+        </li>
+        <li class="last">
+            <a href="/themes">All Themes</a>
+        </li>
+    </div>
+</ul>        </div>
+    </div>
+</ul>            </li>
+            <li class="blog">
+                <a href="/blog">Articles</a>
+                <ul>
+    <div class="sub-nav-container clearfix">
+        <div class="sub-nav-columns">
+            <div class="blog-list">
+                <li class="blog-features">
+                    <a href="/blog/features">Features</a>
+                </li>
+                <li class="blog-reviews">
+                    <a href="/blog/reviews-5">Reviews</a>
+                </li>
+                <li class="blog-lists">
+                    <a href="/blog/lists">Lists</a>
+                </li>
+            </div>
+            <div class="blog-list">
+                <li class="blog-stream">
+                    <a href="/blog/watch-online">Watch Online</a>
+                </li>
+                <li class="blog-news">
+                    <a href="/blog/news">News</a>
+                </li>
+                <li class="blog-all">
+                    <a href="/blog">All Posts</a>
+                </li>
+            </div>
+            <div class="blog-subnav right">
+                <div class="sub-nav-blog-content"></div>
+            </div>
+        </div>
+    </div>
+</ul>
+            </li>
+<!--            <li class="videos">-->
+<!--                <a href="/videos" class="videos-link">Video</a>-->
+<!--            </li>-->
+            <li class="recommendations">
+                <a href="/recommendations">Recommendations</a>
+            </li>
+            <li class="advanced-search">
+                <a href="/advanced-search">Advanced Search</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="user-social-nav">
+        <nav class="social-nav">
+            <ul>
+                <li class="facebook">
+                    <a href="https://www.facebook.com/AllMoviecom" alt="Like us on Facebook" title="Like us on Facebook">Facebook</a>
+                </li>
+                <li class="twitter">
+                    <a href="https://twitter.com/#!/Allmovie" alt="Follow us on Twitter" title="Follow us on Twitter">Twitter</a>
+                </li>
+                <li class="rss">
+                    <a alt="Subscribe to our RSS feed" title="Subscribe to our RSS feed" alt="Subscribe to our RSS feed" href="/rss" target="_blank">RSS</a>
+                </li>
+            </ul>
+        </nav>
+
+        <nav class="user-nav"></nav>
+    </div>
+
+</div>    </div>
+</div>
+
+<div id="cmn_wrap">
+    <div class="content-container" itemscope itemtype="https://schema.org/Movie">
+
+        <div class="sidebar">
+            <div class="movie-cover">
+                <div class="movie-contain">
+
+                    <div class="poster">
+                                                    <script type="text/javascript">
+                                var posterGallery = [{"width":"375","height":"500","url":"https:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_500x500_m0\/31004430_Armyofone_1536x2048.jpg"}];
+                            </script>
+                            <img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_500x500_m0/31004430_Armyofone_1536x2048.jpg"
+                                 class="poster-launch"
+                                 width="303"
+                                 alt="Army of One"
+                                 title="click to embiggen">
+                                            </div>
+                    <div class="bit-soundtrack">
+                        <div class="desktop-only">
+                            <script>
+                                /* TFP - allmovie.com - white bg */
+                                (function() {
+                                    var opts = {
+                                        artist: "Army of One",
+                                        song: "",
+                                        tv_term: "Army of One",
+                                        adunit_id: 100000942,
+                                        div_id: "cf_async_" + Math.floor((Math.random() * 999999999))
+                                    };
+                                    document.write('<div id="'+opts.div_id+'"></div>');var c=function(){cf.showAsyncAd(opts)};if(typeof window.cf !== 'undefined')c();else{cf_async=!0;var r=document.createElement("script"),s=document.getElementsByTagName("script")[0];r.async=!0;r.src="//srv.clickfuse.com/showads/showad.js";r.readyState?r.onreadystatechange=function(){if("loaded"==r.readyState||"complete"==r.readyState)r.onreadystatechange=null,c()}:r.onload=c;s.parentNode.insertBefore(r,s)};
+                                })();
+                            </script>
+                        </div>
+                        <div class="mobile-only">
+                            <script>
+                                /* TFP - allmovie.com - black bg */
+                                (function() {
+                                    var opts = {
+                                        artist: "Army of One",
+                                        song: "",
+                                        tv_term: "Army of One",
+                                        adunit_id: 100000940,
+                                        div_id: "cf_async_" + Math.floor((Math.random() * 999999999))
+                                    };
+                                    document.write('<div id="'+opts.div_id+'"></div>');var c=function(){cf.showAsyncAd(opts)};if(typeof window.cf !== 'undefined')c();else{cf_async=!0;var r=document.createElement("script"),s=document.getElementsByTagName("script")[0];r.async=!0;r.src="//srv.clickfuse.com/showads/showad.js";r.readyState?r.onreadystatechange=function(){if("loaded"==r.readyState||"complete"==r.readyState)r.onreadystatechange=null,c()}:r.onload=c;s.parentNode.insertBefore(r,s)};
+                                })();
+                            </script>
+                        </div>
+                    </div>
+                    <div class="affiliate-links">
+                        <div class="mobile-only">Watch or buy on:</div>
+    <div  class="movie-affiliates num-2">
+    <ul class="partner-buttons">
+                    <li>
+                <a title="Search on Amazon" href="https://www.amazon.com/s/?field-keywords=movie: &#34;Army%20of%20One&#34; by &#34;Larry%20Charles&#34;&tag=allmoviedotcom-20"
+                   class="partner-button amazon"
+                   data-title="Army+of+One" ></a>
+            </li>
+        
+        
+        
+                    <li>
+                <a title="Find on Google Play" href="https://play.google.com/store/search?c=movies&hl=en&q=Army+of+One+Larry+Charles"
+                   class="partner-button googleplay"
+                   data-title="Army+of+One" ></a>
+            </li>
+            </ul>
+</div>
+
+
+
+
+
+                    </div>
+                                        <div class="play-trailer">
+                        <a title="Click to play"
+                           href="https://video.internetvideoarchive.net/video.mp4?fmt=4&amp;cmd=6&amp;videokbrate=450&amp;sub=AllMovie&amp;customerId=198732&amp;PublishedId=925752&amp;e=1590134277&amp;h=489554191aa5d6b046fa914ba9146962"
+                           class="sprite btn-trailer-large play-movie"
+                           data-title="ARMY OF ONE"
+                           data-objectid="V   668154"
+                           data-publishedid = "925752" >
+                            <span class="trailer-btn-image"></span>
+                            <span class="trailer-btn-text">Watch Trailer</span>
+                        </a>
+                    </div>
+                                    </div>
+            </div>
+
+            <div class="advertising medium-rectangle">
+                <div id="AllMovie_MoviePage_300x250_ATF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('aside', {
+containerId: 'AllMovie_MoviePage_300x250_ATF'
+});
+}
+</script>            </div>
+
+            <section class="basic-info">
+
+    
+            <div class="mpaa">
+            <h4>MPAA Rating</h4>
+            <div>R</div>
+        </div>
+    
+            <div class="flags">
+            <h4>Flags</h4>
+            <div>
+                                    <span>Drug Content</span>
+                                    <span>Profanity</span>
+                            </div>
+        </div>
+    
+    
+            <div class="produced-by">
+            <h4>Produced by</h4>
+            <div>Conde Nast Entertainment, Endgame Entertainment, Kasbah-Film Tanger</div>
+        </div>
+    
+            <div class="released-by">
+            <h4>Released By</h4>
+            <div>Anchor Bay Entertainment, TWC-Dimension</div>
+        </div>
+    
+    
+    <a href="https://www.allmovie.com/movie/army-of-one-v668154/corrections" class="submit-corrections">Submit Corrections</a>
+    <span class="gallery-lightbox-bind"></span>
+
+</section>
+                <section class="media-gallery" >
+        <h3>Photo Gallery</h3>
+     
+        <div class="media-gallery-content">
+                            <script type="text/javascript">
+                    var imageGallery = [{"width":"584","height":"389","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Wan_PR_1463\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army-of-One_still1.jpg","title":"Army of One","credit":""},{"width":"584","height":"389","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Wan_PR_1463\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army-of-One_still2.jpg","title":"Army of One","credit":""},{"width":"584","height":"389","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Wan_PR_1463\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army-of-One_still3.jpg","title":"Army of One","credit":""},{"width":"584","height":"388","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Wan_PR_1463\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army-of-One_still4.jpg","title":"Army of One","credit":""},{"width":"584","height":"778","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_m_1200x1600.jpg","title":"Army of One","credit":"Starz"},{"width":"584","height":"292","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_m_2048x1024.jpg","title":"Army of One","credit":"Starz"},{"width":"584","height":"438","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_m_2048x1536.jpg","title":"Army of One","credit":"Starz"},{"width":"584","height":"438","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_2048x1536.jpg","title":"Army of One","credit":"Starz"},{"width":"568","height":"800","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/TMDB4_2462\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army%20of%20One.jpg","title":"Army of One","credit":""},{"width":"540","height":"800","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Wan_PR_1463\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/Army-of-One_PA_2x3.jpg","title":"Army of One","credit":""},{"width":"584","height":"584","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_1000X1000.jpg","title":"Army of One","credit":"Starz"},{"width":"584","height":"778","url":"http:\/\/cps-static.rovicorp.com\/2\/Open\/Starz_Encore_24\/Program\/31004430\/_derived_jpg_q90_584x800_m0\/31004430_Armyofone_1536x2048.jpg","title":"Army of One","credit":"Starz"},{"width":"568","height":"800","url":"http:\/\/cps-static.rovicorp.com\/1\/adg\/cov584\/drw200\/w257\/w25769p6wlj.jpg","title":"Army of One","credit":""},{"width":"584","height":"742","url":"http:\/\/cps-static.rovicorp.com\/1\/adg\/cov584\/drw200\/w257\/w25770ndder.jpg","title":"Army of One","credit":""},{"width":"568","height":"800","url":"http:\/\/cps-static.rovicorp.com\/1\/adg\/cov584\/drw200\/w277\/w27736you4m.jpg","title":"Army of One","credit":""},{"width":"584","height":"742","url":"http:\/\/cps-static.rovicorp.com\/1\/adg\/cov584\/drw200\/w277\/w27737qxq63.jpg","title":"Army of One","credit":""}];
+                </script>
+            
+                                <div class="media-gallery-image gallery-launch thumbnail" data-index="1" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Wan_PR_1463/Program/31004430/_derived_jpg_q90_584x800_m0/Army-of-One_still1.jpg" style="left:-31px;" width="192" height="128" alt="click for photo gallery" data-debug="584x389"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" data-index="2" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Wan_PR_1463/Program/31004430/_derived_jpg_q90_584x800_m0/Army-of-One_still2.jpg" style="left:-31px;" width="192" height="128" alt="click for photo gallery" data-debug="584x389"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" data-index="3" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Wan_PR_1463/Program/31004430/_derived_jpg_q90_584x800_m0/Army-of-One_still3.jpg" style="left:-31px;" width="192" height="128" alt="click for photo gallery" data-debug="584x389"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" data-index="4" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Wan_PR_1463/Program/31004430/_derived_jpg_q90_584x800_m0/Army-of-One_still4.jpg" style="left:-31px;" width="192" height="128" alt="click for photo gallery" data-debug="584x388"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="5" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_m_1200x1600.jpg" style="top:-22px;" width="130" height="173" alt="click for photo gallery" data-debug="584x778"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="6" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_m_2048x1024.jpg" style="left:-63px;" width="256" height="128" alt="click for photo gallery" data-debug="584x292"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="7" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_m_2048x1536.jpg" style="left:-20px;" width="170" height="128" alt="click for photo gallery" data-debug="584x438"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="8" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_2048x1536.jpg" style="left:-20px;" width="170" height="128" alt="click for photo gallery" data-debug="584x438"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="9" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/TMDB4_2462/Program/31004430/_derived_jpg_q90_584x800_m0/Army%20of%20One.jpg" style="top:-27px;" width="130" height="183" alt="click for photo gallery" data-debug="568x800"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="10" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Wan_PR_1463/Program/31004430/_derived_jpg_q90_584x800_m0/Army-of-One_PA_2x3.jpg" style="top:-32px;" width="130" height="192" alt="click for photo gallery" data-debug="540x800"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="11" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_1000X1000.jpg" style="" width="130" height="128" alt="click for photo gallery" data-debug="584x584"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="12" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/2/Open/Starz_Encore_24/Program/31004430/_derived_jpg_q90_584x800_m0/31004430_Armyofone_1536x2048.jpg" style="top:-22px;" width="130" height="173" alt="click for photo gallery" data-debug="584x778"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="13" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/1/adg/cov584/drw200/w257/w25769p6wlj.jpg" style="top:-27px;" width="130" height="183" alt="click for photo gallery" data-debug="568x800"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="14" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/1/adg/cov584/drw200/w257/w25770ndder.jpg" style="top:-18px;" width="130" height="165" alt="click for photo gallery" data-debug="584x742"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="15" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/1/adg/cov584/drw200/w277/w27736you4m.jpg" style="top:-27px;" width="130" height="183" alt="click for photo gallery" data-debug="568x800"></div></a>
+                    </div>
+
+                                <div class="media-gallery-image gallery-launch thumbnail" style="display:none;" data-index="16" data-gallerytype="gallery">
+                        <a title="click for photo gallery"><div class="cropped-image crop-image-borders" style="width:130px;height:128px;" ><img src="https://cps-static.rovicorp.com/1/adg/cov584/drw200/w277/w27737qxq63.jpg" style="top:-18px;" width="130" height="165" alt="click for photo gallery" data-debug="584x742"></div></a>
+                    </div>
+
+            
+                    </div>
+        <div class="dots-container">
+                            <a href="#" class="dot dots-full"></a>
+                            <a href="#" class="dot dots-empty"></a>
+                            <a href="#" class="dot dots-empty"></a>
+                            <a href="#" class="dot dots-empty"></a>
+                    </div>
+    </section>
+
+
+
+            <div class="advertising medium-rectangle-btf">
+                <div id="AllMovie_MoviePage_300x250_BTF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 18 <= 0) {
+cmnUntLoadWrapper('aside', {
+containerId: 'AllMovie_MoviePage_300x250_BTF'
+, lazyLoad: true
+});
+}
+</script>            </div>
+
+        </div>
+
+        <div class="content">
+
+            <header>
+    <hgroup class="movie-info">
+        <h2 class="movie-title" itemprop="name">
+            Army of One <span class="release-year">(2016)</span>        </h2>
+                    <h3 class="movie-director" id="movie-director-link"
+                itemprop="director"
+                itemscope itemtype="https://schema.org/Person">
+                Directed by <span itemprop="name">
+                    <a href="https://www.allmovie.com/artist/larry-charles-p266743">Larry Charles</a>                </span>
+            </h3>
+                <a href="javascript:void(0)" class="add-to-favorite-link" data-id="V+++668154" data-type="movie" data-text="FAVORITE" data-addtolist="addtofavorite"></a>
+    </hgroup>
+
+            <hgroup class="details">
+                                            <span class="header-movie-genres">
+                    Genres - <a href="https://www.allmovie.com/genre/comedy-d648">Comedy</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                </span>
+            
+                                            <span class="header-movie-subgenres">
+                    Sub-Genres - <a href="https://www.allmovie.com/subgenre/absurd-comedy-d622">Absurd Comedy</a>, <a href="https://www.allmovie.com/subgenre/satire-d527">Satire</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                </span>
+            
+                                            <span>
+                    Release Date - <span>Nov 4, 2016 (USA - Limited)</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                </span>
+            
+                            <span>
+                    Run Time - <span>92 min.</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                </span>
+            
+                            <span>
+                    Countries - <span>United States </span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                </span>
+            
+                            <span>
+                    MPAA Rating - <span>R</span>
+                </span>
+            
+        </hgroup>
+    
+    <ul class="ratings" itemscope itemtype="https://schema.org/Rating">
+        <li id="microdata-rating">
+            <span>AllMovie Rating</span>
+
+            <div class="allmovie-rating rating-allmovie-3" itemprop="ratingValue">
+                                    4                            </div>
+
+            <meta itemprop="name" content="AllMovie Rating">
+            <meta itemprop="bestRating" content="10">
+            <meta itemprop="worstRating" content="1">
+        </li>
+
+        <li class="average">
+            <span>
+                User Ratings <span class="inner-avg-user-rating">(<span class="average-user-rating-count" data-id="V   668154">0</span>)</span>
+            </span>
+            <div class="average-user-rating" data-id="V   668154"></div>
+        </li>
+
+        <li>
+            <span>Your Rating</span>
+            <div class="movie-page-user-rating user-rating"
+                 data-id="V   668154"
+                 data-artist="Larry Charles"
+                 data-title="Army of One">
+            </div>
+        </li>
+    </ul>
+</header>
+            <ul class="tabs overview">
+
+        <li class="tab overview" data-sections="synopsis,moods,themes">
+        <a href="/movie/army-of-one-v668154">
+            Overview
+            <span class="arrow">&darr;</span>
+        </a>
+    </li>
+    
+    
+            <li class="tab cast-crew">
+            <a href="/movie/army-of-one-v668154/cast-crew">
+                Cast & Crew
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+
+    
+            <li class="tab releases">
+            <a href="/movie/army-of-one-v668154/releases">
+                Releases
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+            <li class="tab related">
+            <a href="/movie/army-of-one-v668154/related">
+                Related
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+            <li class="tab showtimes">
+            <a href="/movie/army-of-one-v668154/showtimes">
+                Showtimes
+                <span class="arrow">&darr;</span>
+            </a>
+        </li>
+    
+</ul>
+            
+<div class="allmovie-share" data-sharemessage="Check out Army of One (2016) by Larry Charles - Movie Review, Cast &  Crew, Releases, Awards, Related and Showtimes - AllMovie - ">
+    <p>
+        Share on
+    </p>
+    <ul class="share-menu">
+        <li>
+            <a title="Share on Facebook" class="share-button facebook" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.allmovie.com%2Fmovie%2Farmy-of-one-v668154">facebook</a>
+        </li>
+        <li>
+            <a title="Share on Twitter" class="share-button twitter" href="https://twitter.com/share?url=https%3A%2F%2Fwww.allmovie.com%2Fmovie%2Farmy-of-one-v668154&text=Check+out+Army+of+One+%282016%29+by+Larry+Charles+-+Movie+Review%2C+Cast+%26++Crew%2C+Releases%2C+Awards%2C+Related+and+Showtimes+-+AllMovie+-+&counturl=https%3A%2F%2Fwww.allmovie.com%2Fmovie%2Farmy-of-one-v668154">twitter</a>
+        </li>
+    </ul>
+    <div class="share-modal">
+        <a title="close button" class="close-button"></a>
+        <div class="share-frame"></div>
+    </div>
+</div>    <section class="review read-more synopsis">
+
+        <h4 class="review-author headline" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            Synopsis
+                            by <span itemprop="name">Jack Rodgers</span>
+                    </h4>
+
+        <div class="text" itemprop="description">
+            In this comedy inspired by a true story, an ex-con handyman (Nicolas Cage) receives a message from God (Russell Brand) that he must head to Pakistan and bring Osama bin Laden to justice. However, his bizarre journey draws the attention of U.S. forces stationed in the Middle East, who are baffled and annoyed by his vigilante quest. Wendi McLendon-Covey and Rainn Wilson co-star. Directed by Larry Charles (Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan).        </div>
+
+    </section>
+<section class="characteristics">
+    <div class="headline">
+        <h3>Characteristics</h3>
+    </div>
+
+            <div class="moods">
+            <div class="sub-headline">
+                <h4>Moods</4>
+            </div>
+            <div class="charactList">
+                                                                                                                        <a href = "/characteristic/mood/fantastic-reality-d2024">Fantastic Reality</a> | <a href = "/characteristic/mood/for-love-of-country-d257">For Love of Country</a>            </div>
+        </div>
+    
+            <div class="themes">
+            <div class="sub-headline">
+                <h4>Themes</h4>
+            </div>
+            <div class="charactList">
+                                                                                                                                                                                                <a href = "/characteristic/theme/message-from-god-d1397">Message From God</a> | <a href = "/characteristic/theme/nothing-goes-right-d1410">Nothing Goes Right</a> | <a href = "/characteristic/theme/obsessive-quests-d1546">Obsessive Quests</a> | <a href = "/characteristic/theme/saintly-fools-d1430">Saintly Fools</a>            </div>
+        </div>
+    
+    
+    
+</section>
+    <section class="related-highlights">
+        <div class="headline">
+            <h3>Related Movies</h3>
+        </div>
+        <div class="related-movies clearfix">
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V++++92078&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/a-foreign-affair-v92078">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/1SPS/VT/AMG/_derived_jpg_q90_480x340_m0/5556250_PA_Occidente_1.jpg"  width="205" height="274" alt="A Foreign Affair" style="left:-9px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/1SPS/VT/AMG/_derived_jpg_q90_480x340_m0/5556250_PA_Occidente_1.jpg" width="205" height="274" alt="A Foreign Affair" style="left:-9px;"></noscript></div>
+                        <span class="relation">
+                            Similar To                        </span>
+                    </a>
+                </div>
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V+++610259&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/entertainment-v610259">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/Magnolia%20Pictures/Program/24690614/_derived_jpg_q90_480x340_m0/24690614_Entertainment_Poster2x3_6_1578585325479_6.jpg"  width="186" height="279" alt="Entertainment" style="top:-2px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/Magnolia%20Pictures/Program/24690614/_derived_jpg_q90_480x340_m0/24690614_Entertainment_Poster2x3_6_1578585325479_6.jpg" width="186" height="279" alt="Entertainment" style="top:-2px;"></noscript></div>
+                        <span class="relation">
+                            Similar To                        </span>
+                    </a>
+                </div>
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V+++529744&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/the-dictator-v529744">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/CinemaSource/The%20Dictator/_derived_jpg_q90_246x326_m0/110552R_CR.jpg"  width="205" height="274" alt="The Dictator" style="left:-9px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/CinemaSource/The%20Dictator/_derived_jpg_q90_246x326_m0/110552R_CR.jpg" width="205" height="274" alt="The Dictator" style="left:-9px;"></noscript></div>
+                        <span class="relation">
+                            Related To                        </span>
+                    </a>
+                </div>
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V+++346334&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/borat-v346334">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/20th%20Century%20Fox/Borat/_derived_jpg_q90_480x340_m0/large_Boratbox.jpg"  width="197" height="274" alt="Borat" style="left:-5px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/20th%20Century%20Fox/Borat/_derived_jpg_q90_480x340_m0/large_Boratbox.jpg" width="197" height="274" alt="Borat" style="left:-5px;"></noscript></div>
+                        <span class="relation">
+                            Related To                        </span>
+                    </a>
+                </div>
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V++++20649&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/the-great-dictator-v20649">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/AMG/The%20Great%20Dictator/_derived_jpg_q90_480x340_m0/t30598nv7kt.jpg"  width="204" height="274" alt="The Great Dictator" style="left:-9px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/AMG/The%20Great%20Dictator/_derived_jpg_q90_480x340_m0/t30598nv7kt.jpg" width="204" height="274" alt="The Great Dictator" style="left:-9px;"></noscript></div>
+                        <span class="relation">
+                            Similar To                        </span>
+                    </a>
+                </div>
+                            <div class="related-highlight" data-tooltip="{&quot;id&quot;:&quot;V+++++9040&quot;,&quot;thumbnail&quot;:true}">
+                    <a href="/movie/the-cheap-detective-v9040">
+
+                        <div class="cropped-image crop-image-borders" style="width:185px;height:273px;" ><img class="lazy" src="/images/lazy.gif" data-original="https://cps-static.rovicorp.com/2/Open/AMG_Video_504/Program/2358/_derived_jpg_q90_480x340_m0/u59244bi21n.jpg"  width="186" height="279" alt="The Cheap Detective" style="top:-2px;"><noscript><img src="https://cps-static.rovicorp.com/2/Open/AMG_Video_504/Program/2358/_derived_jpg_q90_480x340_m0/u59244bi21n.jpg" width="186" height="279" alt="The Cheap Detective" style="top:-2px;"></noscript></div>
+                        <span class="relation">
+                            Similar To                        </span>
+                    </a>
+                </div>
+                    </div>
+        <a class="all-related" href="/movie/army-of-one-v668154/related">See All Related Movies</a>
+    </section>
+
+                            <section class="allmovie_anyclip">
+    <script type="text/javascript">
+        if ( !isMobile_AllMovie ) {
+            document.write('<div id="ac-lre-player-ph">');
+            document.write('<div id="ac-lre-player"></div>');
+            document.write('</div>');
+            document.write('\x3Cscript id="lre-player-widget" src="https://player.anyclip.com/anyclip-widget/lre-widget/prod/v1/src/lre.js" pubname="allmoviecom" widgetname="0011r00001kaHto_1006">\x3C/script>');
+        } else {
+            document.write('<div id="ac-lre-iframe-ph">');
+            document.write('</div>');
+            document.write('\x3Cscript id="lre-player-widget" src="https://player.anyclip.com/anyclip-widget/lre-widget/prod/v1/src/lre.js" pubname="allmoviecom" widgetname="0011r00001kaHto_1017">\x3C/script>');
+        }
+    </script>
+</section>            
+        </div>
+
+    </div>
+
+<div class="stripe-container footer-leaderboard">
+    <div class="advertising leaderboard">
+                                    <div id="AllMovie_MoviePage_728x90_BTF"></div><script type="text/javascript">
+if ( !isMobile_AllMovie || 0 <= 0) {
+cmnUntLoadWrapper('top', {
+containerId: 'AllMovie_MoviePage_728x90_BTF'
+, lazyLoad: true
+});
+}
+</script>                        </div>
+</div>
+<div class="stripe-container footer-container">
+    <footer>
+        <div class="other-sites">
+                <a href="//www.allmusic.com/" title="AllMusic - Albums and Artist Database - Music Search, Guide, Recommendations, Videos and Reviews">AllMusic</a>&nbsp;&nbsp;|&nbsp;
+                <a href="//www.sidereel.com/" title="SideReel - Watch TV &amp; Movies Online | Episodes, Seasons, Series | SideReel">SideReel</a>&nbsp;&nbsp;|&nbsp;
+                <a href="//www.celebified.com/" title="Celebified - Celebrity news, watch videos, get tv info">Celebified</a>
+        </div>
+
+        <div class="corporate-links">
+                <a href="/about" title="AllMovie About">About</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/faq" title="AllMovie FAQ">FAQ</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/copyright-policy" title="AllMovie - Copyright Policy &amp; Intellectual Property Rights">Copyright Policy</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/advertise" title="AllMovie Advertising Network"><br class="mobile-break">Advertise</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/privacy-notice" title="Privacy Notice">Privacy Notice</a>&nbsp;&nbsp;|&nbsp;
+                <a href="/terms-of-service" title="AllMovie Terms of Service">Terms of Service</a>
+        </div>
+
+        <div class="copyright">
+                &copy;2020 AllMovie, Netaktion LLC<span class="line-two">&nbsp;&nbsp;|&nbsp;&nbsp;</span><br class="mobile-break">All Rights Reserved
+        </div>
+    </footer>
+</div><script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="//cdn-gce.allmovie.com/js/jquery/jquery-2.2.4.min.js"%3E%3C/script%3E'))</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>!window.jQuery.ui && document.write(unescape('%3Cscript src="//cdn-gce.allmovie.com/js/jquery/jquery-ui.min.js"%3E%3C/script%3E'))</script>
+
+<!--            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>-->
+
+<script src="//cdn-gce.allmovie.com/cache/dist/js/global-67f430d018.js"></script>
+
+
+        <script src="//cdn-gce.allmovie.com/cache/dist/js/movie-8f9a29aa2d.overview.js"></script>
+    <script>
+        if (User.loggedIn) {
+            ga('set', 'dimension1', 'Yes');
+        } else {
+            ga('set', 'dimension1', 'No');
+        }
+    </script>
+
+<!-- Begin comScore Tag -->
+<script>
+    var _comscore = _comscore || [];
+    _comscore.push({c1: "2", c2: "17343944"});
+    (function () {
+        var s = document.createElement("script"), el = document.getElementsByTagName("script")[0];
+        s.async = true;
+        s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+        el.parentNode.insertBefore(s, el);
+    })();
+</script>
+<noscript>
+    <img src="//b.scorecardresearch.com/p?c1=2&c2=17343944&cv=2.0&cj=1"/>
+</noscript>
+<!-- End comScore Tag -->
+
+</div>
+</div>
+
+<!-- Footer Ad Tag -->
+<script type="text/javascript">
+(function() {
+if (window.isMobile) return;
+window.cToolbarInit = function() {
+cToolbar.load({
+mobileRightButton: 'email',
+facebookUsername: 'AllMovieCom',
+facebookName: 'AllMovie',
+twitterHandle: 'AllMovie',
+twitterName: 'AllMovie',
+youtubeChannel: '',
+youtubeChannelName:'',
+desktopBackground: 'solid',
+desktopSocialButtons: ['twitter','facebook'],
+channel: 'Entertainment'
+});
+};
+var ns = document.createElement('script');
+ns.type = 'text/javascript';
+ns.async = true;
+ns.src = '//toolbar.complex.com/dist/ctoolbar.min.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(ns, s);
+})();
+</script>
+<script type="text/javascript">
+    _qevents.push({
+        qacct: "p-59TntzuqummDw",
+        labels: "AllMedia.AllMovie"
+    });
+</script>
+<noscript>
+    <div style="display:none;">
+        <img src="//pixel.quantserve.com/pixel/p-59TntzuqummDw.gif?labels=AllMedia" border="0" height="1" width="1"
+             alt="Quantcast"/>
+    </div>
+</noscript>
+
+<!-- Double Verify -->
+<img src="https://tps30.doubleverify.com/visit.jpg?ctx=2908533&cmp=2736444&sid=24324&plc=DV-RTHM20170324001&advid=2908534&region=30&btadsrv=rhythmone&app=appid&sup=sspid&DVP_DV_TT=2&DVP_DV_CT=1&DVP_APPID=NotApplicable&DVP_SSPID=NotApplicable&DVP_PUBID=NotApplicable&DVP_PP_BUNDLE_ID=NotApplicable&DVP_RO_SSPID=NotApplicable&DVP_PP_ORTB_PUB_ID=NotApplicable&DVP_RO_SITEID=NotApplicable&DVP_RO_TRAFFIC=NotApplicable&DVP_PP_DEAL_ID=NotApplicable&DVPX_PP_IMP_ID=NotApplicable&DVPX_PP_UID=NotApplicable&DVP_RO_CDID=NotApplicable&DVPX_PP_AUCTION_UA=Wget%2F1.19.4+%28linux-gnu%29&DVP_PP_AUCTION_IP=10.128.0.55&turl=AllMovie.com&dvtagver=6.1.img"
+     alt="" width="0" height="0">
+<!-- End Double Verify -->
+
+    <!-- captify pixel -->
+    <script>
+                (function (c, a, p, t, i, f, y) {
+            i = c.createElement(a);
+            t = c.getElementsByTagName(a)[0];
+            i.type = 'text/javascript';
+            i.async = true;
+            i.src = p;
+            t.parentNode.insertBefore(i, t);
+        })(document, 'script', '//p.cpx.to/p/12022/px.js');
+    </script>
+
+    <!-- eyeota pixel -->
+    <!--            <script type="text/javascript" async defer src="//ps.eyeota.net/pixel?pid=omdhoi0&t=ajs&sid=allmovie"></script>-->
+
+
+    <script>
+        $.getScript("/ads.js", function (data, textStatus, jqxhr) {
+            // success block
+            ga('send', 'event', 'setCustomDimension', 1, {
+                'dimension2': 'not_adblocking',
+                'nonInteraction': true
+            });
+
+        })
+            .fail(function () {
+                ga('send', 'event', 'setCustomDimension', 1, {
+                    'dimension2': 'is_adblocking',
+                    'nonInteraction': true
+                });
+
+                // fire ad block detected GA event
+                allmovie.gaTrackEvent({data: ["AdBlock", "Interaction", "User Has Adblock Enabled"]});
+            });
+    </script>
+
+<!-- fire refresh -->
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"37e6a77380","applicationID":"39645109","transactionName":"NlMEYhZXW0oEWkQNVg8ZJ1UQX1pXSnRfElAEGQlAAURDUABO","queueTime":0,"applicationTime":535,"atts":"GhQTFF5NSBVHWBJeQhxL","errorBeacon":"bam.nr-data.net","agent":""}</script></body>
+</html>
