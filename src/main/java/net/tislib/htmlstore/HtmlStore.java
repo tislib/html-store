@@ -1,17 +1,21 @@
 package net.tislib.htmlstore;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class HtmlStore {
 
-    Map<String, String> data = new HashMap<>();
+    TokenTree tokenTree = new TokenTree();
 
-    public void put(String item, String htmlContent) {
-        data.put(item, htmlContent);
+    public void put(String key, String htmlContent) {
+        Document document = Jsoup.parse(htmlContent);
+        tokenTree.add(document, key);
     }
 
-    public String get(String item) {
-        return data.get(item);
+    public String get(String key) {
+        return tokenTree.getContent(key);
     }
 }

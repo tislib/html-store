@@ -1,19 +1,17 @@
 package net.tislib.htmlstore;
 
 import lombok.Data;
-import org.jsoup.nodes.Attribute;
-import org.jsoup.nodes.Attributes;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.*;
 
-import java.net.URL;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class TokenTree {
 
     private long pageIndex = 0;
-    private Map<Long, String> urls = new HashMap<>();
+    private Map<Long, String> pageKeys = new HashMap<>();
     private Map<String, Integer> textMap = new HashMap<>();
     private Map<Integer, String> textMapR = new HashMap<>();
     private PathTreeItem root = new PathTreeItem("root");
@@ -40,7 +38,7 @@ public class TokenTree {
         Element urlsMeta = document.selectFirst("metadata > urls");
         Element textMeta = document.selectFirst("metadata > texts");
 
-        for (Map.Entry<Long, String> entry : urls.entrySet()) {
+        for (Map.Entry<Long, String> entry : pageKeys.entrySet()) {
             Element element = new Element("u");
             element.text(entry.getValue());
             element.attr("i", String.valueOf(entry.getKey()));
@@ -66,7 +64,7 @@ public class TokenTree {
         Element urlsMeta = document.selectFirst("metadata > urls");
         Element textMeta = document.selectFirst("metadata > texts");
 
-        for (Map.Entry<Long, String> entry : urls.entrySet()) {
+        for (Map.Entry<Long, String> entry : pageKeys.entrySet()) {
             Element element = new Element("u");
             element.text(entry.getValue());
             element.attr("i", String.valueOf(entry.getKey()));
@@ -143,9 +141,9 @@ public class TokenTree {
         return element;
     }
 
-    public void add(Document newDocument, URL url) {
+    public void add(Document newDocument, String key) {
         try {
-            urls.put(++pageIndex, url.toString());
+            pageKeys.put(++pageIndex, key);
             newDocument.select(".header-main-nav").remove();
             newDocument.select(".footer-container").remove();
             newDocument = TokenUtil.prepareDoc(newDocument);
@@ -213,9 +211,9 @@ public class TokenTree {
     public Object getData() {
         Map<String, Object> data = new HashMap<>();
         data.put("merged", toRecData(root, null));
-        data.put("urls", urls);
+        data.put("urls", pageKeys);
 
-        for (Map.Entry<Long, String> entry : urls.entrySet()) {
+        for (Map.Entry<Long, String> entry : pageKeys.entrySet()) {
             data.put(String.valueOf(entry.getKey()), toRecData(root, entry.getKey()));
         }
 
@@ -296,6 +294,42 @@ public class TokenTree {
             }
         }
         return true;
+    }
+
+    public String getContent(String key) {
+        Long index = pageKeys.entrySet().stream().filter(item -> item.getValue().equals(key)).findFirst().get().getKey();
+
+        return ((Element) toElement(root, index)).html();
+    }
+
+    private Node toElement(PathTreeItem root, Long index) {
+        Element element = new Element(root.tag);
+
+        root.attributes.forEach(element::attr);
+
+        if (root.pageUrls != null && root.pageUrls.size() > 0 && !root.pageUrls.contains(index)) {
+            return null;
+        }
+
+        Function<Node, Integer> attrIndex = item -> {
+            if (item.attr("i").equals("")) {
+                return 0;
+            }
+            return Integer.valueOf(item.attr("i"));
+        };
+
+        if (element.tagName().equals("text")) {
+            return new TextNode(textMapR.get(Integer.parseInt(element.attr("i"))));
+        }
+
+        root.children.stream()
+                .map(item -> toElement(item, index))
+                .filter(Objects::nonNull)
+                .sorted(Comparator.comparing(attrIndex))
+                .peek(item -> item.removeAttr("index"))
+                .forEach(element::appendChild);
+
+        return element;
     }
 
     @Data

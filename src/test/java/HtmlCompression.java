@@ -1,6 +1,11 @@
 import lombok.SneakyThrows;
 import net.tislib.htmlstore.HtmlStore;
 import org.apache.commons.io.IOUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.Node;
+import org.jsoup.nodes.TextNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,11 +42,38 @@ public class HtmlCompression {
                 original
                         .replaceAll("[\\s+]?\n+[\\s+]?", "") // remove newline chars
                         .replaceAll("(>)(\\s+)(<)", "$1$3") // remove white space between tags
-                        .replaceAll("<!--.*?-->", "")
+                        .replaceAll("<!.*?-->", "")
+                        .replaceAll("<script.*?-->", "")
+                        .replaceAll("<head></head>", "")
+                        .replaceAll("<body></body>", "")
                         .toLowerCase();
         String html1 = normalizer.apply(htmlContent);
         String html2 = normalizer.apply(decompressedHtmlContent);
-        Assert.assertEquals("Both documents are identical", html1, html2);
+
+
+        Document document1 = Jsoup.parse(html1);
+        Document document2 = Jsoup.parse(html2);
+
+        assertDomEquals(document1.head(), document2.head());
+    }
+
+    private void assertDomEquals(Element document1, Element document2) {
+        for (int i = 0; i < document1.childNodeSize(); i++) {
+            Node node1 = document1.childNode(i);
+            Node node2 = document2.childNode(i);
+            Assert.assertEquals(node1.getClass(), node2.getClass());
+
+            if (node1 instanceof TextNode) {
+                Assert.assertEquals(((TextNode) node1).text().trim(), ((TextNode) node2).text().trim());
+            } else if (node1 instanceof Element && node2 instanceof Element) {
+                Assert.assertEquals(((Element) node1).tagName(), ((Element) node2).tagName());
+                String tagName = ((Element) node1).tagName();
+                if (tagName.equals("script") || tagName.equals("style")) {
+                    continue;
+                }
+                assertDomEquals((Element) node1, (Element) node2);
+            }
+        }
     }
 
 
