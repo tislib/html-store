@@ -38,7 +38,7 @@ public class HtmlCompression {
 
     @SneakyThrows
     private void store(String data) {
-        try (FileOutputStream fos = new FileOutputStream("/home/taleh/Projects/html-store/src/test/resources/export/out.html")) {
+        try (FileOutputStream fos = new FileOutputStream(this.getClass().getClassLoader().getResource("export/out.html").getFile())) {
             fos.write(data.getBytes());
         }
     }
