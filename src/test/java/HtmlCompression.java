@@ -23,10 +23,20 @@ public class HtmlCompression {
         long size = 0;
 
         for (String item : new File(testData).list()) {
+            String htmlContent = readFile(item);
+            htmlStore.put(item, htmlContent);
+        }
+
+        for (String item : new File(testData).list()) {
             System.out.println(item);
             String htmlContent = readFile(item);
-            compressDecompress(item, htmlContent);
 
+            String decompressedHtmlContent = htmlStore.get(item);
+
+            String html1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent)).html();
+            String html2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent)).html();
+
+            assertDomEquals(html1, html2);
 
             String data = htmlStore.export();
             store(data);
@@ -41,18 +51,6 @@ public class HtmlCompression {
         try (FileOutputStream fos = new FileOutputStream(this.getClass().getClassLoader().getResource("export/out.html").getFile())) {
             fos.write(data.getBytes());
         }
-    }
-
-    private void compressDecompress(String item, String htmlContent) {
-
-        htmlStore.put(item, htmlContent);
-
-        String decompressedHtmlContent = htmlStore.get(item);
-
-        String html1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent)).html();
-        String html2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent)).html();
-
-        assertDomEquals(html1, html2);
     }
 
     private void assertDomEquals(String html1, String html2) {
