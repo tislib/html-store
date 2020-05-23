@@ -18,4 +18,8 @@ public class HtmlStore {
     public String get(String key) {
         return tokenTree.getContent(key);
     }
+
+    public String export() {
+        return tokenTree.getDocument().html();
+    }
 }

@@ -1,7 +1,6 @@
 package net.tislib.htmlstore;
 
 import lombok.Data;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 
 import java.util.*;
@@ -144,9 +143,7 @@ public class TokenTree {
     public void add(Document newDocument, String key) {
         try {
             pageKeys.put(++pageIndex, key);
-            newDocument.select(".header-main-nav").remove();
-            newDocument.select(".footer-container").remove();
-            newDocument = TokenUtil.prepareDoc(newDocument);
+            newDocument = DocumentUtil.prepareDoc(newDocument);
 
             merge(root, newDocument, pageIndex);
         } catch (Exception e) {
@@ -183,7 +180,7 @@ public class TokenTree {
 
         for (Element node : childNodes) {
             PathTreeItem existingNode = new PathTreeItem(node.tagName());
-            existingNode.attributes.putAll(TokenUtil.toMap(node.attributes()));
+            existingNode.attributes.putAll(DocumentUtil.toMap(node.attributes()));
             merge(existingNode, node, pageId);
             existingElement.getChildren().add(existingNode);
         }
@@ -311,23 +308,32 @@ public class TokenTree {
             return null;
         }
 
-        Function<Node, Integer> attrIndex = item -> {
-            if (item.attr("i").equals("")) {
+        Function<PathTreeItem, Integer> attrIndex = item -> {
+            if (item.attributes.get("index") == null) {
                 return 0;
             }
-            return Integer.valueOf(item.attr("i"));
+            return Integer.valueOf(item.attributes.get("index"));
         };
 
         if (element.tagName().equals("text")) {
             return new TextNode(textMapR.get(Integer.parseInt(element.attr("i"))));
         }
 
+        if (element.tagName().equals("doctype")) {
+            return null;
+        }
+
         root.children.stream()
+                .sorted(Comparator.comparing(attrIndex))
                 .map(item -> toElement(item, index))
                 .filter(Objects::nonNull)
-                .sorted(Comparator.comparing(attrIndex))
                 .peek(item -> item.removeAttr("index"))
                 .forEach(element::appendChild);
+
+        if (root.children.size() > 0 && element.childNodeSize() == 0) {
+            // should be removed
+            return null;
+        }
 
         return element;
     }
@@ -343,7 +349,6 @@ public class TokenTree {
     @Data
     public static class PathTreeItem {
         public final String tag;
-        public String text;
 
         public Map<String, String> attributes = new HashMap<>();
 

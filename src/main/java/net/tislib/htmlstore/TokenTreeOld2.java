@@ -34,7 +34,7 @@ public class TokenTreeOld2 {
     public void add(Document newDocument, URL url) {
         Integer id = getUrlId(url);
 
-        merge(document, TokenUtil.prepareDoc(newDocument), id);
+        merge(document, DocumentUtil.prepareDoc(newDocument), id);
     }
 
     private void merge(Element existingElement, Element newElement, Integer pageId) {

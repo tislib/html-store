@@ -1,18 +1,16 @@
 import lombok.SneakyThrows;
+import net.tislib.htmlstore.DocumentUtil;
 import net.tislib.htmlstore.HtmlStore;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
-import org.jsoup.nodes.TextNode;
+import org.jsoup.nodes.*;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.function.Function;
 
 public class HtmlCompression {
 
@@ -23,7 +21,22 @@ public class HtmlCompression {
         String testData = this.getClass().getClassLoader().getResource("test-data").getFile();
 
         for (String item : new File(testData).list()) {
+            if (item.equals("arsenal-v656165.html")) {
+                continue;
+            }
+            htmlStore = new HtmlStore();
+
+            System.out.println(item);
+            String data = htmlStore.export();
+            store(data);
             compressDecompress(item);
+        }
+    }
+
+    @SneakyThrows
+    private void store(String data) {
+        try (FileOutputStream fos = new FileOutputStream("/home/taleh/Projects/html-store/src/test/resources/export/out.html")) {
+            fos.write(data.getBytes());
         }
     }
 
@@ -34,27 +47,17 @@ public class HtmlCompression {
 
         String decompressedHtmlContent = htmlStore.get(item);
 
-        assertDomEquals(htmlContent, decompressedHtmlContent);
+        String html1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent)).html();
+        String html2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent)).html();
+
+        assertDomEquals(html1, html2);
     }
 
     private void assertDomEquals(String htmlContent, String decompressedHtmlContent) {
-        Function<String, String> normalizer = (original) ->
-                original
-                        .replaceAll("[\\s+]?\n+[\\s+]?", "") // remove newline chars
-                        .replaceAll("(>)(\\s+)(<)", "$1$3") // remove white space between tags
-                        .replaceAll("<!.*?-->", "")
-                        .replaceAll("<script.*?-->", "")
-                        .replaceAll("<head></head>", "")
-                        .replaceAll("<body></body>", "")
-                        .toLowerCase();
-        String html1 = normalizer.apply(htmlContent);
-        String html2 = normalizer.apply(decompressedHtmlContent);
+        Document document1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent));
+        Document document2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent));
 
-
-        Document document1 = Jsoup.parse(html1);
-        Document document2 = Jsoup.parse(html2);
-
-        assertDomEquals(document1.head(), document2.head());
+        assertDomEquals(document1, document2);
     }
 
     private void assertDomEquals(Element document1, Element document2) {
@@ -67,13 +70,24 @@ public class HtmlCompression {
                 Assert.assertEquals(((TextNode) node1).text().trim(), ((TextNode) node2).text().trim());
             } else if (node1 instanceof Element && node2 instanceof Element) {
                 Assert.assertEquals(((Element) node1).tagName(), ((Element) node2).tagName());
-                String tagName = ((Element) node1).tagName();
-                if (tagName.equals("script") || tagName.equals("style")) {
-                    continue;
-                }
+                assertAttributesEquals(node1.attributes(), node2.attributes());
+
                 assertDomEquals((Element) node1, (Element) node2);
             }
         }
+    }
+
+    private void assertAttributesEquals(Attributes attributes, Attributes attributes1) {
+        attributes.forEach(item -> {
+            boolean found = false;
+            for (Attribute attribute : attributes1) {
+                if (item.getKey().equals(attribute.getKey()) && item.getValue().equals(attribute.getValue())) {
+                    found = true;
+                }
+            }
+
+            Assert.assertTrue(found);
+        });
     }
 
 
