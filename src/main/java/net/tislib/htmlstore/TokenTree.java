@@ -185,9 +185,7 @@ public class TokenTree {
             existingElement.getChildren().add(existingNode);
         }
 
-        if (childNodes.size() == 0) {
-            existingElement.pageUrls.add(pageId);
-        }
+        existingElement.pageUrls.add(pageId);
     }
 
     private boolean checkNodesSimilar(Element node, PathTreeItem pathTreeItem) {
@@ -323,17 +321,13 @@ public class TokenTree {
             return null;
         }
 
+        element.removeAttr("index");
+
         root.children.stream()
                 .sorted(Comparator.comparing(attrIndex))
                 .map(item -> toElement(item, index))
                 .filter(Objects::nonNull)
-                .peek(item -> item.removeAttr("index"))
                 .forEach(element::appendChild);
-
-        if (root.children.size() > 0 && element.childNodeSize() == 0) {
-            // should be removed
-            return null;
-        }
 
         return element;
     }

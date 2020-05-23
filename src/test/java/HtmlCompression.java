@@ -21,11 +21,6 @@ public class HtmlCompression {
         String testData = this.getClass().getClassLoader().getResource("test-data").getFile();
 
         for (String item : new File(testData).list()) {
-            if (item.equals("arsenal-v656165.html")) {
-                continue;
-            }
-            htmlStore = new HtmlStore();
-
             System.out.println(item);
             String data = htmlStore.export();
             store(data);
@@ -53,9 +48,9 @@ public class HtmlCompression {
         assertDomEquals(html1, html2);
     }
 
-    private void assertDomEquals(String htmlContent, String decompressedHtmlContent) {
-        Document document1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent));
-        Document document2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent));
+    private void assertDomEquals(String html1, String html2) {
+        Document document1 = DocumentUtil.cleanUp(Jsoup.parse(html1));
+        Document document2 = DocumentUtil.cleanUp(Jsoup.parse(html2));
 
         assertDomEquals(document1, document2);
     }
