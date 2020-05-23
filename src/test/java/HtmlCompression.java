@@ -20,11 +20,19 @@ public class HtmlCompression {
     public void compressDecompress() {
         String testData = this.getClass().getClassLoader().getResource("test-data").getFile();
 
+        long size = 0;
+
         for (String item : new File(testData).list()) {
             System.out.println(item);
+            String htmlContent = readFile(item);
+            compressDecompress(item, htmlContent);
+
+
             String data = htmlStore.export();
             store(data);
-            compressDecompress(item);
+
+            size += htmlContent.length();
+            System.out.println((data.length() * 100 / size));
         }
     }
 
@@ -35,8 +43,7 @@ public class HtmlCompression {
         }
     }
 
-    private void compressDecompress(String item) {
-        String htmlContent = readFile(item);
+    private void compressDecompress(String item, String htmlContent) {
 
         htmlStore.put(item, htmlContent);
 
