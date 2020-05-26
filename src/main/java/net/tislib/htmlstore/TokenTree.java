@@ -1,19 +1,45 @@
 package net.tislib.htmlstore;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class TokenTree {
+@RequiredArgsConstructor
+public class TokenTree implements HtmlStore {
+
+    private final TokenTreeConfig config;
 
     private long pageIndex = 0;
     private Map<Long, String> pageKeys = new HashMap<>();
+    private Map<String, Long> pageKeysR = new HashMap<>();
     private Map<String, Integer> textMap = new HashMap<>();
     private Map<Integer, String> textMapR = new HashMap<>();
     private PathTreeItem root = new PathTreeItem("root");
+
+    @Override
+    public void put(String key, String htmlContent) {
+        Document document = Jsoup.parse(htmlContent);
+        this.add(document, key);
+    }
+
+    @Override
+    public String get(String key) {
+        return this.getContent(key);
+    }
+
+    @Override
+    public String export() {
+        return this.getDocument().html();
+    }
+
+    public Object getDataTemplate() {
+        return this.getTemplate();
+    }
 
     public void analyze() {
     }
@@ -27,7 +53,7 @@ public class TokenTree {
     }
 
     private int count(PathTreeItem root) {
-        return 1 + root.children.stream().mapToInt(this::count).sum();
+        return 1 + root.getChildren().stream().mapToInt(this::count).sum();
     }
 
     public Document getDocument() {
@@ -56,84 +82,17 @@ public class TokenTree {
         return document;
     }
 
-    public Document getDocument2() {
-        Document document = new Document("http://example.com");
-        document.html("<metadata><urls></urls><texts></texts></metadata>");
-
-        Element urlsMeta = document.selectFirst("metadata > urls");
-        Element textMeta = document.selectFirst("metadata > texts");
-
-        for (Map.Entry<Long, String> entry : pageKeys.entrySet()) {
-            Element element = new Element("u");
-            element.text(entry.getValue());
-            element.attr("i", String.valueOf(entry.getKey()));
-            urlsMeta.appendChild(element);
-        }
-
-        for (Map.Entry<String, Integer> entry : textMap.entrySet()) {
-            Element element = new Element("t");
-            element.text(entry.getKey());
-            element.attr("i", String.valueOf(entry.getValue()));
-            textMeta.appendChild(element);
-        }
-
-        Map<PathTreeItem, Integer> refs = new HashMap<>();
-
-        document.appendChild(toElement2(root, refs));
-
-        return document;
-    }
-
-    private Element toElement2(PathTreeItem root, Map<PathTreeItem, Integer> refs) {
-        if (depth(root) > 2) {
-            if (refs.containsKey(root)) {
-                Element ref = new Element("ref");
-                ref.attr("i", String.valueOf(refs.get(root)));
-                return ref;
-            }
-        }
-        Element element = new Element(root.tag);
-
-        root.attributes.forEach(element::attr);
-
-        String pages = root.pageUrls.stream().map(String::valueOf).collect(Collectors.joining(","));
-        if (pages.length() > 0) {
-            element.attr("p", pages);
-        }
-
-        root.children.stream()
-                .map(root1 -> toElement2(root1, refs))
-                .forEach(element::appendChild);
-
-        if (depth(root) > 2) {
-            int index = refs.size();
-            refs.put(root, index);
-            element.attr("ri", String.valueOf(index));
-        }
-
-        return element;
-    }
-
-    private int depth(PathTreeItem root) {
-        if (root.children.size() == 0) {
-            return 1;
-        }
-        return 1 + root.children.stream().map(this::depth)
-                .max(Comparator.comparingInt(item -> item))
-                .get();
-    }
-
     private Element toElement(PathTreeItem root) {
-        Element element = new Element(root.tag);
+        Element element = new Element(root.getTag());
 
-        root.attributes.forEach(element::attr);
+        root.getAttributes().forEach(element::attr);
 
-        String pages = root.pageUrls.stream().map(String::valueOf).collect(Collectors.joining(","));
+        String pages = root.getPageUrls().stream().map(String::valueOf).collect(Collectors.joining(","));
         if (pages.length() > 0) {
             element.attr("p", pages);
         }
 
-        root.children.stream()
+        root.getChildren().stream()
                 .map(this::toElement)
                 .forEach(element::appendChild);
 
@@ -143,7 +102,8 @@ public class TokenTree {
     public void add(Document newDocument, String key) {
         try {
             pageKeys.put(++pageIndex, key);
-            newDocument = DocumentUtil.prepareDoc(newDocument);
+            pageKeysR.put(key, pageIndex);
+            newDocument = DocumentUtil.prepareDoc(newDocument, config);
 
             merge(root, newDocument, pageIndex);
         } catch (Exception e) {
@@ -151,10 +111,10 @@ public class TokenTree {
         }
     }
 
-    private void merge(PathTreeItem existingElement, Element newElement, Long pageId) {
+    private void merge(PathTreeItem parentNode, Element newElement, Long pageId) {
         List<Element> childNodes = newElement.children();
 
-        ArrayList<PathTreeItem> existingNodesCopy = new ArrayList<>(existingElement.children);
+        ArrayList<PathTreeItem> existingNodesCopy = new ArrayList<>(parentNode.getChildren());
 
 
         for (Element node : new ArrayList<>(childNodes)) {
@@ -180,17 +140,18 @@ public class TokenTree {
 
         for (Element node : childNodes) {
             PathTreeItem existingNode = new PathTreeItem(node.tagName());
-            existingNode.attributes.putAll(DocumentUtil.toMap(node.attributes()));
+            existingNode.setAttributes(DocumentUtil.toMap(node.attributes()));
+            existingNode.setParent(parentNode);
             merge(existingNode, node, pageId);
-            existingElement.getChildren().add(existingNode);
+            parentNode.getChildren().add(existingNode);
         }
 
-        existingElement.pageUrls.add(pageId);
+        parentNode.getPageUrls().add(pageId);
     }
 
     private boolean checkNodesSimilar(Element node, PathTreeItem pathTreeItem) {
-        return pathTreeItem != null && node.tagName().equals(pathTreeItem.tag)
-                && equals(node.attributes(), pathTreeItem.attributes);
+        return pathTreeItem != null && node.tagName().equals(pathTreeItem.getTag())
+                && equals(node.attributes(), pathTreeItem.getAttributes());
     }
 
     private boolean equals(Attributes attributes, Map<String, String> map) {
@@ -203,18 +164,8 @@ public class TokenTree {
         return true;
     }
 
-    public Object getData() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("merged", toRecData(root, null));
-        data.put("urls", pageKeys);
-
-        for (Map.Entry<Long, String> entry : pageKeys.entrySet()) {
-            data.put(String.valueOf(entry.getKey()), toRecData(root, entry.getKey()));
-        }
-
-//        return toRecData(root, 1L);
-
-        return data;
+    public Object getData(String item) {
+        return toRecData(root, pageKeysR.get(item));
     }
 
     public Object getTemplate() {
@@ -222,10 +173,10 @@ public class TokenTree {
     }
 
     private Object toTemplate(PathTreeItem root) {
-        if (root.tag.equals("text")) {
-            return textMapR.get(Integer.valueOf(root.attributes.get("i")));
+        if (root.getTag().equals("text")) {
+            return textMapR.get(Integer.valueOf(root.getAttributes().get("i")));
         }
-        List<Object> res = root.children.stream()
+        List<Object> res = root.getChildren().stream()
                 .map(this::toTemplate)
                 .map(this::arrayFlatMap)
                 .filter(Objects::nonNull)
@@ -237,7 +188,8 @@ public class TokenTree {
         }
 
         Map<String, Object> data = new HashMap<>();
-        data.put("field", "");
+        data.put("field", SelectionHelper.predictFieldName(root));
+        data.put("selector", SelectionHelper.getUniqueCssSelector(root));
         data.put("sub", res);
         if (res.size() == 0) {
             return null;
@@ -246,14 +198,14 @@ public class TokenTree {
     }
 
     private Object toRecData(PathTreeItem root, Long key) {
-        if (root.tag.equals("text")) {
+        if (root.getTag().equals("text")) {
             Map<String, Object> data = new HashMap<>();
-            String text = textMapR.get(Integer.valueOf(root.attributes.get("i")));
+            String text = textMapR.get(Integer.valueOf(root.getAttributes().get("i")));
             data.put("txt", text);
             if (key == null) {
-                data.put("p", root.pageUrls);
+                data.put("p", root.getPageUrls());
             }
-            if (key != null && !root.pageUrls.contains(key)) {
+            if (key != null && !root.getPageUrls().contains(key)) {
                 return Collections.emptyList();
             }
             if (!filterItem(text)) {
@@ -261,7 +213,7 @@ public class TokenTree {
             }
             return Collections.singletonList(data);
         }
-        return root.children.stream()
+        return root.getChildren().stream()
                 .map(root1 -> toRecData(root1, key))
                 .map(this::arrayFlatMap)
                 .filter(Objects::nonNull)
@@ -292,25 +244,25 @@ public class TokenTree {
     }
 
     public String getContent(String key) {
-        Long index = pageKeys.entrySet().stream().filter(item -> item.getValue().equals(key)).findFirst().get().getKey();
+        Long index = pageKeysR.get(key);
 
         return ((Element) toElement(root, index)).html();
     }
 
     private Node toElement(PathTreeItem root, Long index) {
-        Element element = new Element(root.tag);
+        Element element = new Element(root.getTag());
 
-        root.attributes.forEach(element::attr);
+        root.getAttributes().forEach(element::attr);
 
-        if (root.pageUrls != null && root.pageUrls.size() > 0 && !root.pageUrls.contains(index)) {
+        if (root.getPageUrls() != null && root.getPageUrls().size() > 0 && !root.getPageUrls().contains(index)) {
             return null;
         }
 
         Function<PathTreeItem, Integer> attrIndex = item -> {
-            if (item.attributes.get("index") == null) {
+            if (item.getAttributes().get("index") == null) {
                 return 0;
             }
-            return Integer.valueOf(item.attributes.get("index"));
+            return Integer.valueOf(item.getAttributes().get("index"));
         };
 
         if (element.tagName().equals("text")) {
@@ -323,7 +275,7 @@ public class TokenTree {
 
         element.removeAttr("index");
 
-        root.children.stream()
+        root.getChildren().stream()
                 .sorted(Comparator.comparing(attrIndex))
                 .map(item -> toElement(item, index))
                 .filter(Objects::nonNull)
@@ -340,14 +292,4 @@ public class TokenTree {
         List<DataTreeItem> items;
     }
 
-    @Data
-    public static class PathTreeItem {
-        public final String tag;
-
-        public Map<String, String> attributes = new HashMap<>();
-
-        private Set<Long> pageUrls = new HashSet<>();
-
-        private List<PathTreeItem> children = new ArrayList<>();
-    }
 }

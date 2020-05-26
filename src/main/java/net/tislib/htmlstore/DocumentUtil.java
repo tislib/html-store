@@ -6,15 +6,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DocumentUtil {
-    public static Document prepareDoc(Document document) {
+    public static Document prepareDoc(Document document, TokenTreeConfig config) {
         Document newDocument = new Document(document.baseUri());
 
-        prepareDoc(newDocument, document);
+        prepareDoc(newDocument, document, config);
 
         return newDocument;
     }
 
-    private static void prepareDoc(Element newElement, Element existingElement) {
+    public static void walkElement(Element element, NodeVisitor visitor) {
+        int index = 0;
+        for (Node node : element.childNodes()) {
+            visitor.apply(node, element, index++);
+            if (node instanceof Element) {
+                walkElement((Element) node, visitor);
+            }
+        }
+    }
+
+    private static void prepareDoc(Element newElement, Element existingElement, TokenTreeConfig config) {
         int index = 0;
         for (Node node : existingElement.childNodes()) {
             if (node instanceof TextNode) {
@@ -24,15 +34,19 @@ public class DocumentUtil {
                     continue;
                 }
                 index++;
-                element.attr("index", String.valueOf(index));
+                if (config.isKeepIndexing()) {
+                    element.attr("index", String.valueOf(index));
+                }
                 newElement.appendChild(element);
             } else if (node instanceof Element) {
                 Element element = ((Element) node).clone();
                 element.html("");
-                prepareDoc(element, (Element) node);
+                prepareDoc(element, (Element) node, config);
 
                 index++;
-                element.attr("index", String.valueOf(index));
+                if (config.isKeepIndexing()) {
+                    element.attr("index", String.valueOf(index));
+                }
                 newElement.appendChild(element);
             } else if (node instanceof DocumentType) {
                 /*Element element = new Element("doctype");
@@ -97,5 +111,9 @@ public class DocumentUtil {
         attributes.forEach(item -> map.put(item.getKey(), item.getValue()));
 
         return map;
+    }
+
+    public static interface NodeVisitor {
+        public void apply(Node node, Element parent, Integer index);
     }
 }

@@ -24,7 +24,7 @@ public class Tokenizer {
         List<Token> allTokens = new ArrayList<>();
         Set<Token> distinctTokens = new HashSet<>();
 
-        TokenTree tokenTree = new TokenTree();
+        TokenTree tokenTree = new TokenTree(TokenTreeConfig.builder().build());
 
         long pathCount = 0;
 

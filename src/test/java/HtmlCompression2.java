@@ -1,7 +1,7 @@
 import lombok.SneakyThrows;
 import net.tislib.htmlstore.DocumentUtil;
+import net.tislib.htmlstore.GraphTreeStore;
 import net.tislib.htmlstore.HtmlStore;
-import net.tislib.htmlstore.TokenTree;
 import net.tislib.htmlstore.TokenTreeConfig;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
@@ -14,41 +14,41 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 
-public class HtmlCompression {
+public class HtmlCompression2 {
 
-    private HtmlStore htmlStore = new TokenTree(TokenTreeConfig.builder()
+    private HtmlStore htmlStore = new GraphTreeStore(TokenTreeConfig.builder()
             .keepIndexing(true)
             .build());
 
-    @Test
-    public void compressDecompress() {
-        String testData = this.getClass().getClassLoader().getResource("test-data").getFile();
-
-        long size = 0;
-
-        for (String item : new File(testData).list()) {
-            String htmlContent = readFile(item);
-            htmlStore.put(item, htmlContent);
-        }
-
-        for (String item : new File(testData).list()) {
-            System.out.println(item);
-            String htmlContent = readFile(item);
-
-            String decompressedHtmlContent = htmlStore.get(item);
-
-            String html1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent)).html();
-            String html2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent)).html();
-
-            assertDomEquals(html1, html2);
-
-            String data = htmlStore.export();
-            store(data);
-
-            size += htmlContent.length();
-            System.out.println((data.length() * 100 / size));
-        }
-    }
+//    @Test
+//    public void compressDecompress() {
+//        String testData = this.getClass().getClassLoader().getResource("test-data").getFile();
+//
+//        long size = 0;
+//
+//        for (String item : new File(testData).list()) {
+//            String htmlContent = readFile(item);
+//            htmlStore.put(item, htmlContent);
+//        }
+//
+//        for (String item : new File(testData).list()) {
+//            System.out.println(item);
+//            String htmlContent = readFile(item);
+//
+//            String decompressedHtmlContent = htmlStore.get(item);
+//
+//            String html1 = DocumentUtil.cleanUp(Jsoup.parse(htmlContent)).html();
+//            String html2 = DocumentUtil.cleanUp(Jsoup.parse(decompressedHtmlContent)).html();
+//
+//            assertDomEquals(html1, html2);
+//
+//            String data = htmlStore.export();
+//            store(data);
+//
+//            size += htmlContent.length();
+//            System.out.println((data.length() * 100 / size));
+//        }
+//    }
 
     @Test
     public void compressDecompressRatio() {
